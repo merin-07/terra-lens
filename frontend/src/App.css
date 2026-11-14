@@ -1,3 +1,9 @@
+/* ==========================================================================
+   TERRA-LENS: Planetary Analog Workbench - Main Theme
+   Faithfully preserves the original sidebar + main stage layout,
+   with synchronized split-scope, X-Ray loupe, weighting engine,
+   diagnostic matrix, and campaign brief dossier.
+   ========================================================================== */
 
 * {
   box-sizing: border-box;
@@ -8,12 +14,17 @@ body {
   font-family: Inter, Arial, sans-serif;
   background: #090e16;
   color: #e8edf5;
+  min-height: 100vh;
 }
 
 .app {
   min-height: 100vh;
   display: flex;
 }
+
+/* ==========================================================================
+   SIDEBAR (Original look & feel preserved)
+   ========================================================================== */
 
 .sidebar {
   width: 245px;
@@ -63,6 +74,13 @@ body {
   font-size: 13px;
   margin-bottom: 7px;
   border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-item:hover {
+  background: #141f2e;
+  color: #d1dce5;
 }
 
 .nav-item.active {
@@ -80,6 +98,7 @@ body {
 .sidebar-bottom p {
   color: #718198;
   letter-spacing: 0;
+  margin-top: 4px;
 }
 
 .status-dot {
@@ -91,10 +110,15 @@ body {
   margin-right: 8px;
 }
 
+/* ==========================================================================
+   MAIN CONTENT VIEWPORT
+   ========================================================================== */
+
 .main {
   flex: 1;
   padding: 35px 45px;
   max-width: 1600px;
+  overflow-y: auto;
 }
 
 .topbar,
@@ -109,12 +133,24 @@ body {
   margin: 9px 0 0;
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-dossier-btn {
+  padding: 9px 14px;
+  font-size: 12px;
+}
+
 .top-status {
   font-size: 10px;
   color: #76d8c0;
   letter-spacing: 1px;
 }
 
+/* Intro Banner */
 .intro {
   margin: 35px 0 25px;
   padding: 25px 30px;
@@ -144,6 +180,7 @@ body {
   padding: 15px;
 }
 
+/* Selection Grid */
 .selection-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -201,6 +238,10 @@ select {
   color: #8494a9;
 }
 
+/* ==========================================================================
+   TERRAIN COMPARISON & SYNCHRONIZED SPLIT-SCOPE
+   ========================================================================== */
+
 .comparison {
   margin-top: 35px;
 }
@@ -221,154 +262,29 @@ select {
   color: #0b171b;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.map-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-top: 20px;
+.compare-button:hover {
+  background: #9cf0db;
 }
 
-.map-panel {
-  padding: 13px;
-}
-
-.map-label {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  margin: 5px 5px 14px;
-}
-
-.map-label span {
-  font-size: 10px;
-  color: #76d8c0;
-  letter-spacing: 1px;
-}
-
-.map-label strong {
-  font-size: 13px;
-}
-
-
-.map-placeholder {
-  height: 230px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  color: #a9b9c7;
-  overflow: hidden;
-}
-
-.map-placeholder span {
-  font-size: 11px;
-  letter-spacing: 2px;
-  flex-shrink: 0;
-}
-
-.map-placeholder small {
-  color: #8796a9;
-  font-size: 11px;
-  flex-shrink: 0;
-}
-
-.lunar {
-  background: radial-gradient(circle at 50% 45%, #59636c, #303a45 60%, #172431);
-}
-
-.map-panel .map-placeholder.lunar .planetary-image {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 145px;
-  object-fit: contain;
-  flex-shrink: 1;
-  min-height: 0;
-  margin: 0 auto;
-}
-
-
-.earth {
-  background: radial-gradient(circle at 50% 45%, #466d63, #263f42 60%, #172c36);
-}
-
-footer {
-  border-top: 1px solid #253345;
-  margin-top: 40px;
-  padding-top: 18px;
-  color: #718198;
-  font-size: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-@media (max-width: 850px) {
-  .sidebar {
-    width: 75px;
-    padding: 20px 12px;
-  }
-
-  .brand h2,
-  .brand span,
-  .nav-label,
-  .nav-item:not(.active),
-  .nav-item.active {
-    font-size: 0;
-  }
-
-  .nav-item {
-    justify-content: center;
-  }
-
-  .main {
-    padding: 25px 18px;
-  }
-
-  .selection-grid,
-  .map-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.earth-map-container {
-  position: relative;
-  width: 100%;
-  height: 230px;
-  overflow: hidden;
-  border-radius: 6px;
-  background: #172c36;
-}
-
-.earth-map {
-  width: 100%;
-  height: 100%;
-}
-
-.map-credit {
-  position: absolute;
-  bottom: 7px;
-  left: 7px;
-  z-index: 2;
-  padding: 5px 8px;
-  border-radius: 4px;
-  background: rgba(9, 14, 22, 0.85);
-  color: #d1dce5;
-  font-size: 9px;
-}
+/* Sensor Toolbar */
 .sensor-toolbar {
   margin: 20px 0;
   padding: 16px;
   background: #111e29;
   border: 1px solid #263b49;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sensor-toolbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sensor-heading {
@@ -378,7 +294,75 @@ footer {
   color: #8fdacb;
   font-size: 12px;
   font-weight: 700;
-  margin-bottom: 14px;
+}
+
+.scope-utility-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loupe-toggle-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #172635;
+  border: 1px solid #344c5e;
+  border-radius: 5px;
+  color: #c5d3dc;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.loupe-toggle-pill.active {
+  background: #143e42;
+  border-color: #22d3ee;
+  color: #22d3ee;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+}
+
+.loupe-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #8494a9;
+}
+
+.loupe-select-input {
+  padding: 4px 8px;
+  background: #0b1420;
+  border: 1px solid #34465a;
+  border-radius: 4px;
+  color: #22d3ee;
+  font-size: 11px;
+}
+
+.zoom-btn-group {
+  display: flex;
+  gap: 4px;
+}
+
+.scope-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #172635;
+  border: 1px solid #344c5e;
+  border-radius: 4px;
+  color: #c5d3dc;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.scope-icon-btn:hover {
+  background: #203548;
+  color: #ffffff;
 }
 
 .sensor-buttons {
@@ -394,6 +378,8 @@ footer {
   border-radius: 5px;
   color: #c5d3dc;
   cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s ease;
 }
 
 .sensor-button:hover {
@@ -406,12 +392,28 @@ footer {
   color: #ffffff;
 }
 
-.sensor-toolbar p {
-  color: #a8b8c4;
-  font-size: 12px;
-  margin: 13px 0 0;
+.active-pairing-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 26, 38, 0.6);
+  padding: 7px 12px;
+  border-radius: 5px;
+  border: 1px dashed rgba(118, 216, 192, 0.25);
+  font-size: 11px;
 }
 
+.active-pairing-box span {
+  color: #76d8c0;
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.active-pairing-box strong {
+  color: #e2edf5;
+}
+
+/* Layer Info Row */
 .layer-info {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -440,17 +442,1046 @@ footer {
   overflow-wrap: anywhere;
 }
 
-@media (max-width: 700px) {
+.scale-locked-text {
+  color: #76d8c0 !important;
+}
+
+/* Dual Map Grid */
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.map-panel {
+  padding: 14px;
+}
+
+.map-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.map-label-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map-label-header span {
+  font-size: 10px;
+  color: #76d8c0;
+  letter-spacing: 1px;
+}
+
+.map-label-header small {
+  color: #8494a9;
+  font-size: 10px;
+}
+
+.map-label strong {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.viewport-container {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  background: #080f18;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #1f3042;
+  cursor: crosshair;
+}
+
+/* Crosshair Reticle */
+.reticle-marker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 8;
+  transform: translate(-50%, -50%);
+}
+
+.crosshair-v {
+  position: absolute;
+  width: 1px;
+  height: 38px;
+  top: -19px;
+  left: 0;
+  background: rgba(34, 211, 238, 0.75);
+  box-shadow: 0 0 4px #22d3ee;
+}
+
+.crosshair-h {
+  position: absolute;
+  height: 1px;
+  width: 38px;
+  top: 0;
+  left: -19px;
+  background: rgba(34, 211, 238, 0.75);
+  box-shadow: 0 0 4px #22d3ee;
+}
+
+.reticle-box {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: -7px;
+  left: -7px;
+  border: 1px solid #22d3ee;
+  box-shadow: 0 0 6px #22d3ee;
+}
+
+.reticle-telemetry {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(7, 12, 19, 0.88);
+  border: 1px solid #22d3ee;
+  border-radius: 3px;
+  padding: 3px 6px;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.reticle-telemetry span {
+  font-size: 9px;
+  font-family: monospace;
+  color: #22d3ee;
+  font-weight: 700;
+}
+
+.reticle-telemetry small {
+  font-size: 8px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+/* X-Ray Loupe Overlay */
+.xray-loupe-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.5), inset 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+.loupe-content-clipper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.loupe-inner-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.loupe-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #22d3ee;
+  box-shadow: 0 0 10px #22d3ee;
+}
+
+.loupe-reticle-cross {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, transparent calc(50% - 0.5px), rgba(34, 211, 238, 0.4) calc(50% - 0.5px), rgba(34, 211, 238, 0.4) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom, transparent calc(50% - 0.5px), rgba(34, 211, 238, 0.4) calc(50% - 0.5px), rgba(34, 211, 238, 0.4) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+
+.loupe-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 16, 26, 0.9);
+  border: 1px solid #22d3ee;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 8px;
+  font-family: monospace;
+  color: #22d3ee;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   WORKBENCH EXTENSIONS: MISSION WEIGHTS & DIAGNOSTICS
+   ========================================================================== */
+
+.workbench-section {
+  margin-top: 45px;
+}
+
+/* Weights Grid */
+.weights-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.weights-controls-card,
+.ranked-analogs-card {
+  padding: 20px;
+}
+
+.presets-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.preset-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #142232;
+  border: 1px solid #283e54;
+  border-radius: 5px;
+  color: #c5d3dc;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+  border-color: #76d8c0;
+  color: #ffffff;
+}
+
+.preset-btn.active {
+  background: #17483f;
+  border-color: #76d8c0;
+  color: #76d8c0;
+}
+
+.reset-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid #283e54;
+  border-radius: 5px;
+  color: #8494a9;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  color: #ffffff;
+  border-color: #76d8c0;
+}
+
+.sliders-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.slider-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slider-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.slider-info span {
+  color: #a9b6c7;
+}
+
+.slider-info strong {
+  color: #76d8c0;
+  font-family: monospace;
+}
+
+.slider-control input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 3px;
+  background: #1e3042;
+  outline: none;
+}
+
+.slider-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #76d8c0;
+  cursor: pointer;
+  box-shadow: 0 0 6px #76d8c0;
+}
+
+/* Ranked Analogs List */
+.ranked-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ranked-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #132233;
+  border: 1px solid #25394d;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ranked-item:hover {
+  background: #192d42;
+  border-color: #3b5a7a;
+}
+
+.ranked-item.selected {
+  border-color: #76d8c0;
+  background: #163636;
+}
+
+.ranked-item-rank {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: monospace;
+  color: #76d8c0;
+  width: 25px;
+}
+
+.ranked-item-details {
+  flex: 1;
+}
+
+.ranked-item-details strong {
+  display: block;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.ranked-item-details span {
+  font-size: 11px;
+  color: #8494a9;
+}
+
+.ranked-item-score {
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #76d8c0;
+  color: #76d8c0;
+  background: rgba(118, 216, 192, 0.12);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.sync-tag {
+  font-size: 9px;
+  font-family: monospace;
+  color: #76d8c0;
+  margin-left: auto;
+}
+
+/* Diagnostics Grid */
+.diagnostics-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.chart-panel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-mini-table {
+  width: 100%;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stats-mini-row {
+  display: grid;
+  grid-template-columns: 80px 60px 60px 1fr;
+  align-items: center;
+  padding: 5px 8px;
+  background: #0d1723;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: monospace;
+}
+
+.stats-mini-row.header {
+  background: transparent;
+  color: #8494a9;
+  font-size: 9px;
+}
+
+.sensor-tag {
+  font-size: 9px;
+}
+.sensor-tag.optical { color: #76d8c0; }
+.sensor-tag.sar { color: #22d3ee; }
+.sensor-tag.thermal { color: #f97316; }
+.sensor-tag.slope { color: #a855f7; }
+
+/* Tiers Column */
+.tiers-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.diagnostic-card {
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.diag-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.diag-tag {
+  font-size: 9px;
+  font-family: monospace;
+  letter-spacing: 0.5px;
+}
+
+.diag-card-header h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.diagnostic-card p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tier 1: Match (Green) */
+.diagnostic-card.tier-match {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.diagnostic-card.tier-match .diag-tag { color: #10b981; }
+.diagnostic-card.tier-match h3 { color: #6ee7b7; }
+.diagnostic-card.tier-match p { color: #d1fae5; }
+
+/* Tier 2: Breakdown (Red) */
+.diagnostic-card.tier-breakdown {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.diagnostic-card.tier-breakdown .diag-tag { color: #ef4444; }
+.diagnostic-card.tier-breakdown h3 { color: #fca5a5; }
+.diagnostic-card.tier-breakdown p { color: #fee2e2; }
+
+/* Tier 3: Mitigation (Blue) */
+.diagnostic-card.tier-mitigation {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+.diagnostic-card.tier-mitigation .diag-tag { color: #38bdf8; }
+.diagnostic-card.tier-mitigation h3 { color: #7dd3fc; }
+.diagnostic-card.tier-mitigation p { color: #e0f2fe; }
+
+/* ==========================================================================
+   CAMPAIGN DOSSIER MODAL & PRINT MEDIA
+   ========================================================================== */
+
+.dossier-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 14, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dossier-modal-dialog {
+  background: #090e17;
+  border: 1px solid #2b4260;
+  border-radius: 8px;
+  width: 950px;
+  max-width: 95vw;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.dossier-actions-bar {
+  padding: 10px 16px;
+  background: #0f1725;
+  border-bottom: 1px solid #1c2a3d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dossier-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dossier-pill-security {
+  font-size: 9px;
+  font-family: monospace;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid #f59e0b;
+  color: #f59e0b;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.dossier-code {
+  font-size: 10px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+.dossier-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dossier-print-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #76d8c0;
+  border: 0;
+  border-radius: 4px;
+  color: #071212;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dossier-print-btn:hover {
+  background: #9cf0db;
+}
+
+.dossier-close-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #1c2a3d;
+  border-radius: 4px;
+  color: #8494a8;
+  cursor: pointer;
+}
+
+.dossier-close-btn:hover {
+  color: #ffffff;
+  border-color: #2b4260;
+}
+
+.dossier-document {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #0a101b;
+}
+
+.dossier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #1c2a3d;
+  padding-bottom: 16px;
+}
+
+.org-title {
+  font-size: 9px;
+  font-family: monospace;
+  color: #76d8c0;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: block;
+}
+
+.dossier-main-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 6px 0;
+}
+
+.header-submeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 10px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+.header-submeta strong {
+  color: #ffffff;
+}
+
+/* Composite Assessment Banner */
+.dossier-composite-banner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  background: #111b29;
+  border: 1px solid #25394d;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.composite-badge-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #1c2a3d;
+  padding-right: 16px;
+}
+
+.composite-label {
+  font-size: 9px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+.composite-score-huge {
+  font-size: 38px;
+  font-weight: 900;
+  font-family: monospace;
+  color: #76d8c0;
+  line-height: 1.1;
+  margin: 4px 0;
+}
+
+.composite-rating {
+  font-size: 8px;
+  font-family: monospace;
+  color: #10b981;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.composite-weights-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.weights-label {
+  font-size: 9px;
+  font-family: monospace;
+  color: #22d3ee;
+  font-weight: 700;
+}
+
+.weights-bar-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weight-pill {
+  padding: 3px 8px;
+  background: #162438;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+.weight-pill strong {
+  color: #ffffff;
+}
+
+.weights-desc {
+  font-size: 11px;
+  color: #8494a8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.dossier-section-title {
+  font-size: 11px;
+  font-family: monospace;
+  color: #76d8c0;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* 4-Sensor Strip */
+.sensor-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.sensor-strip-card {
+  background: #0e1724;
+  border: 1px solid #1c2a3d;
+  border-radius: 5px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sensor-strip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.strip-sensor-badge {
+  font-size: 9px;
+  font-family: monospace;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.strip-sensor-badge.optical { color: #76d8c0; background: rgba(118, 216, 192, 0.15); }
+.strip-sensor-badge.sar { color: #22d3ee; background: rgba(34, 211, 238, 0.15); }
+.strip-sensor-badge.thermal { color: #f97316; background: rgba(249, 115, 22, 0.15); }
+.strip-sensor-badge.slope { color: #a855f7; background: rgba(168, 85, 247, 0.15); }
+
+.sensor-strip-header small {
+  font-size: 8px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+.sensor-strip-previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.strip-preview-pane {
+  position: relative;
+  height: 90px;
+  background: #05080e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.strip-pane-tag {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 7px;
+  font-family: monospace;
+  color: #cbd5e1;
+  border-radius: 2px;
+}
+
+.sensor-strip-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 8px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+/* Two-Col Grid in Dossier */
+.dossier-grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.dossier-box {
+  background: #0e1724;
+  border: 1px solid #1c2a3d;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.dossier-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.dossier-stats-table th {
+  text-align: left;
+  padding: 5px;
+  color: #8494a8;
+  border-bottom: 1px solid #1c2a3d;
+}
+
+.dossier-stats-table td {
+  padding: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #e2edf5;
+}
+
+.bold-cell {
+  font-weight: 700;
+  color: #76d8c0 !important;
+}
+
+.unit-cell {
+  color: #8494a8 !important;
+  font-size: 9px;
+}
+
+.site-geology-note {
+  margin-top: 10px;
+  font-size: 10px;
+  color: #8494a8;
+  line-height: 1.4;
+  padding: 6px 8px;
+  background: #131e30;
+  border-radius: 4px;
+}
+
+/* 3-Tier Table in Dossier */
+.dossier-tier-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #1c2a3d;
+}
+
+.tier-col-label {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.tier-col-body {
+  padding: 10px 12px;
+  font-size: 11px;
+  line-height: 1.45;
+  background: #0e1724;
+}
+
+.match-row .tier-col-label {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+.match-row .tier-col-body { color: #d1fae5; }
+
+.breakdown-row .tier-col-label {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+.breakdown-row .tier-col-body { color: #fee2e2; }
+
+.mitigation-row .tier-col-label {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+.mitigation-row .tier-col-body { color: #e0f2fe; }
+
+/* Signoff */
+.dossier-signoff {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed #1c2a3d;
+}
+
+.signoff-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signoff-role {
+  font-size: 8px;
+  font-family: monospace;
+  color: #8494a8;
+}
+
+.signoff-line {
+  font-size: 10px;
+  color: #8494a8;
+  border-bottom: 1px solid #1c2a3d;
+  padding-bottom: 4px;
+}
+
+.signoff-stamp {
+  font-size: 9px;
+  font-family: monospace;
+  color: #10b981;
+  font-weight: 700;
+  border: 1px solid #10b981;
+  padding: 3px 6px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE & PRINT MEDIA RULES
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 75px;
+    padding: 20px 12px;
+  }
+
+  .brand h2,
+  .brand span,
+  .nav-label,
+  .sidebar-bottom p,
+  .nav-item span {
+    display: none;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .selection-grid,
+  .map-grid,
+  .weights-layout-grid,
+  .diagnostics-layout-grid {
+    grid-template-columns: 1fr;
+  }
+
   .layer-info {
     grid-template-columns: 1fr;
   }
 }
 
-.map-placeholder.lunar {
-  width: 100%;
-  box-sizing: border-box;
-}
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    min-height: auto !important;
+  }
 
-.map-placeholder.lunar .react-transform-wrapper {
-  flex-shrink: 0;
+  .sidebar,
+  .topbar,
+  .intro,
+  .selection-grid,
+  .comparison,
+  .workbench-section,
+  footer,
+  .dossier-actions-bar {
+    display: none !important;
+  }
+
+  .dossier-modal-overlay {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+
+  .dossier-modal-dialog {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    width: 100% !important;
+    background: #ffffff !important;
+  }
+
+  .dossier-document {
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 0 !important;
+  }
+
+  .dossier-main-title {
+    color: #000000 !important;
+  }
+
+  .dossier-composite-banner,
+  .dossier-box,
+  .sensor-strip-card,
+  .tier-col-body {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+
+  .dossier-stats-table th,
+  .dossier-stats-table td {
+    color: #0f172a !important;
+    border-color: #e2e8f0 !important;
+  }
+
+  .tier-row {
+    border-color: #cbd5e1 !important;
+  }
+
+  .tier-col-body {
+    color: #0f172a !important;
+  }
 }

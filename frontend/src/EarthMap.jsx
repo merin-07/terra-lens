@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -80,7 +79,7 @@ export default function EarthMap({ analog }) {
       mapInstance.current = null;
       marker.current = null;
     };
-  }, []);
+  }, [analog]);
 
   useEffect(() => {
     const location =

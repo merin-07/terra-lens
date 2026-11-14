@@ -1,0 +1,306 @@
+{
+  "shackleton": {
+    "tablelands": {
+      "optical": {
+        "target_mean": 0.5095,
+        "analog_mean": 0.6151,
+        "target_std": 0.2009,
+        "analog_std": 0.0565,
+        "structural_correlation": -0.0311
+      },
+      "sar": {
+        "target_mean": 0.4861,
+        "analog_mean": 0.475,
+        "target_std": 0.2703,
+        "analog_std": 0.2584,
+        "structural_correlation": 0.069
+      },
+      "thermal": {
+        "target_mean": 0.3918,
+        "analog_mean": 0.394,
+        "target_std": 0.2534,
+        "analog_std": 0.2521,
+        "structural_correlation": 0.0442
+      },
+      "slope": {
+        "target_mean": 0.4604,
+        "analog_mean": 0.4616,
+        "target_std": 0.0813,
+        "analog_std": 0.081,
+        "structural_correlation": -0.0499
+      }
+    },
+    "harrat-khaybar": {
+      "optical": {
+        "target_mean": 0.5095,
+        "analog_mean": 0.2547,
+        "target_std": 0.2009,
+        "analog_std": 0.0517,
+        "structural_correlation": -0.0677
+      },
+      "sar": {
+        "target_mean": 0.4861,
+        "analog_mean": 0.4731,
+        "target_std": 0.2703,
+        "analog_std": 0.263,
+        "structural_correlation": 0.0503
+      },
+      "thermal": {
+        "target_mean": 0.3918,
+        "analog_mean": 0.3895,
+        "target_std": 0.2534,
+        "analog_std": 0.2523,
+        "structural_correlation": -0.0027
+      },
+      "slope": {
+        "target_mean": 0.4604,
+        "analog_mean": 0.4609,
+        "target_std": 0.0813,
+        "analog_std": 0.0818,
+        "structural_correlation": -0.0931
+      }
+    },
+    "sredinny": {
+      "optical": {
+        "target_mean": 0.5095,
+        "analog_mean": 0.2853,
+        "target_std": 0.2009,
+        "analog_std": 0.0538,
+        "structural_correlation": 0.0188
+      },
+      "sar": {
+        "target_mean": 0.4861,
+        "analog_mean": 0.4728,
+        "target_std": 0.2703,
+        "analog_std": 0.2686,
+        "structural_correlation": -0.0176
+      },
+      "thermal": {
+        "target_mean": 0.3918,
+        "analog_mean": 0.3877,
+        "target_std": 0.2534,
+        "analog_std": 0.2498,
+        "structural_correlation": -0.2018
+      },
+      "slope": {
+        "target_mean": 0.4604,
+        "analog_mean": 0.4627,
+        "target_std": 0.0813,
+        "analog_std": 0.0799,
+        "structural_correlation": -0.03
+      }
+    },
+    "tuktoyaktuk": {
+      "optical": {
+        "target_mean": 0.5095,
+        "analog_mean": 0.5423,
+        "target_std": 0.2009,
+        "analog_std": 0.0593,
+        "structural_correlation": -0.0285
+      },
+      "sar": {
+        "target_mean": 0.4861,
+        "analog_mean": 0.4778,
+        "target_std": 0.2703,
+        "analog_std": 0.2544,
+        "structural_correlation": 0.2631
+      },
+      "thermal": {
+        "target_mean": 0.3918,
+        "analog_mean": 0.3947,
+        "target_std": 0.2534,
+        "analog_std": 0.2604,
+        "structural_correlation": 0.1347
+      },
+      "slope": {
+        "target_mean": 0.4604,
+        "analog_mean": 0.458,
+        "target_std": 0.0813,
+        "analog_std": 0.0836,
+        "structural_correlation": -0.017
+      }
+    },
+    "lut-desert": {
+      "optical": {
+        "target_mean": 0.5095,
+        "analog_mean": 0.7065,
+        "target_std": 0.2009,
+        "analog_std": 0.0435,
+        "structural_correlation": -0.0101
+      },
+      "sar": {
+        "target_mean": 0.4861,
+        "analog_mean": 0.4782,
+        "target_std": 0.2703,
+        "analog_std": 0.2658,
+        "structural_correlation": -0.2204
+      },
+      "thermal": {
+        "target_mean": 0.3918,
+        "analog_mean": 0.3914,
+        "target_std": 0.2534,
+        "analog_std": 0.2623,
+        "structural_correlation": -0.0382
+      },
+      "slope": {
+        "target_mean": 0.4604,
+        "analog_mean": 0.4619,
+        "target_std": 0.0813,
+        "analog_std": 0.0808,
+        "structural_correlation": 0.4037
+      }
+    }
+  },
+  "jezero": {
+    "tablelands": {
+      "optical": {
+        "target_mean": 0.5011,
+        "analog_mean": 0.6164,
+        "target_std": 0.0663,
+        "analog_std": 0.0566,
+        "structural_correlation": -0.2062
+      },
+      "sar": {
+        "target_mean": 0.4744,
+        "analog_mean": 0.475,
+        "target_std": 0.2588,
+        "analog_std": 0.2584,
+        "structural_correlation": 0.0453
+      },
+      "thermal": {
+        "target_mean": 0.391,
+        "analog_mean": 0.394,
+        "target_std": 0.2499,
+        "analog_std": 0.2521,
+        "structural_correlation": 0.0261
+      },
+      "slope": {
+        "target_mean": 0.4601,
+        "analog_mean": 0.4616,
+        "target_std": 0.0817,
+        "analog_std": 0.081,
+        "structural_correlation": -0.0511
+      }
+    },
+    "harrat-khaybar": {
+      "optical": {
+        "target_mean": 0.5011,
+        "analog_mean": 0.2563,
+        "target_std": 0.0663,
+        "analog_std": 0.0571,
+        "structural_correlation": 0.0518
+      },
+      "sar": {
+        "target_mean": 0.4744,
+        "analog_mean": 0.4731,
+        "target_std": 0.2588,
+        "analog_std": 0.263,
+        "structural_correlation": 0.1051
+      },
+      "thermal": {
+        "target_mean": 0.391,
+        "analog_mean": 0.3895,
+        "target_std": 0.2499,
+        "analog_std": 0.2523,
+        "structural_correlation": 0.4108
+      },
+      "slope": {
+        "target_mean": 0.4601,
+        "analog_mean": 0.4609,
+        "target_std": 0.0817,
+        "analog_std": 0.0818,
+        "structural_correlation": 0.0947
+      }
+    },
+    "sredinny": {
+      "optical": {
+        "target_mean": 0.5011,
+        "analog_mean": 0.2896,
+        "target_std": 0.0663,
+        "analog_std": 0.0534,
+        "structural_correlation": -0.0001
+      },
+      "sar": {
+        "target_mean": 0.4744,
+        "analog_mean": 0.4728,
+        "target_std": 0.2588,
+        "analog_std": 0.2686,
+        "structural_correlation": 0.4838
+      },
+      "thermal": {
+        "target_mean": 0.391,
+        "analog_mean": 0.3877,
+        "target_std": 0.2499,
+        "analog_std": 0.2498,
+        "structural_correlation": 0.0145
+      },
+      "slope": {
+        "target_mean": 0.4601,
+        "analog_mean": 0.4627,
+        "target_std": 0.0817,
+        "analog_std": 0.0799,
+        "structural_correlation": -0.1031
+      }
+    },
+    "tuktoyaktuk": {
+      "optical": {
+        "target_mean": 0.5011,
+        "analog_mean": 0.5442,
+        "target_std": 0.0663,
+        "analog_std": 0.0593,
+        "structural_correlation": -0.0058
+      },
+      "sar": {
+        "target_mean": 0.4744,
+        "analog_mean": 0.4778,
+        "target_std": 0.2588,
+        "analog_std": 0.2544,
+        "structural_correlation": 0.0135
+      },
+      "thermal": {
+        "target_mean": 0.391,
+        "analog_mean": 0.3947,
+        "target_std": 0.2499,
+        "analog_std": 0.2604,
+        "structural_correlation": -0.1364
+      },
+      "slope": {
+        "target_mean": 0.4601,
+        "analog_mean": 0.458,
+        "target_std": 0.0817,
+        "analog_std": 0.0836,
+        "structural_correlation": 0.1954
+      }
+    },
+    "lut-desert": {
+      "optical": {
+        "target_mean": 0.5011,
+        "analog_mean": 0.7041,
+        "target_std": 0.0663,
+        "analog_std": 0.0431,
+        "structural_correlation": 0.0138
+      },
+      "sar": {
+        "target_mean": 0.4744,
+        "analog_mean": 0.4782,
+        "target_std": 0.2588,
+        "analog_std": 0.2658,
+        "structural_correlation": 0.0513
+      },
+      "thermal": {
+        "target_mean": 0.391,
+        "analog_mean": 0.3914,
+        "target_std": 0.2499,
+        "analog_std": 0.2623,
+        "structural_correlation": 0.303
+      },
+      "slope": {
+        "target_mean": 0.4601,
+        "analog_mean": 0.4619,
+        "target_std": 0.0817,
+        "analog_std": 0.0808,
+        "structural_correlation": 0.0582
+      }
+    }
+  }
+}

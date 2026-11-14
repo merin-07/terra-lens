@@ -1,0 +1,504 @@
+{
+  "comparison_metrics": {
+    "shackleton_tablelands": {
+      "target_id": "shackleton",
+      "analog_id": "tablelands",
+      "pair_title": "Shackleton Crater (Moon) ⟷ The Tablelands (Canada)",
+      "scores": {
+        "slope": 84,
+        "radar_roughness": 68,
+        "thermal": 64,
+        "geochemical": 81
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 82, "radar_roughness": 76, "thermal": 94, "geochemical": 70 },
+        "analog": { "slope": 84, "radar_roughness": 68, "thermal": 64, "geochemical": 81 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.12,
+          "max": 0.28,
+          "std_dev": 0.05,
+          "unit": "Albedo / Surface Reflectance",
+          "agency_source": "NASA LROC NAC (Moon) vs ESA Sentinel-2 MSI (Earth)"
+        },
+        "sar": {
+          "mean": 1.24,
+          "max": 2.85,
+          "std_dev": 0.42,
+          "unit": "Circular Polarization Ratio (CPR)",
+          "agency_source": "NASA LRO Mini-RF S-band vs CSA RADARSAT-2 C-band"
+        },
+        "thermal": {
+          "mean": 142.5,
+          "max": 284.0,
+          "std_dev": 58.2,
+          "unit": "Radiometric Temperature (Kelvin)",
+          "agency_source": "NASA LRO Diviner (TIR) vs NASA ECOSTRESS (TIR)"
+        },
+        "slope": {
+          "mean": 18.6,
+          "max": 34.2,
+          "std_dev": 6.8,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "NASA LRO LOLA (1064nm) vs ESA Copernicus GLO-30 DEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Ultramafic peridotite mantle obduction exposed without tree cover matches the impact-fractured anorthositic megaregolith of the lunar south pole. Mechanical shear resistance of jagged, angular peridotite talus closely mirrors lunar highland regolith mechanical strength (cohesion 0.3–1.0 kPa, friction angle 38°–45°).",
+        "breakdown": "Terrestrial hyper-maritime precipitation (1,200 mm/year) and ambient 101.3 kPa atmosphere induce extensive aqueous serpentinization, producing hydrated clay rinds that do not occur in lunar vacuum. Ambient temperature remains 200 K higher than cryogenic lunar shadow (40 K).",
+        "mitigation": "Encase test drill and sampling tools in an ultra-dry nitrogen-purged shroud to prevent atmospheric moisture condensation; pre-chill drill bit heads using cryogenic liquid nitrogen baths to evaluate thermal shock in hard rock coring."
+      }
+    },
+    "shackleton_harrat-khaybar": {
+      "target_id": "shackleton",
+      "analog_id": "harrat-khaybar",
+      "pair_title": "Shackleton Crater (Moon) ⟷ Harrat Khaybar (Saudi Arabia)",
+      "scores": {
+        "slope": 66,
+        "radar_roughness": 89,
+        "thermal": 58,
+        "geochemical": 76
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 82, "radar_roughness": 76, "thermal": 94, "geochemical": 70 },
+        "analog": { "slope": 66, "radar_roughness": 89, "thermal": 58, "geochemical": 76 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.16,
+          "max": 0.34,
+          "std_dev": 0.06,
+          "unit": "Albedo / Surface Reflectance",
+          "agency_source": "NASA LROC NAC vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 1.62,
+          "max": 3.10,
+          "std_dev": 0.54,
+          "unit": "CPR / Backscatter Ratio",
+          "agency_source": "NASA LRO Mini-RF S-band vs JAXA ALOS-2 PALSAR-2 L-band"
+        },
+        "thermal": {
+          "mean": 312.4,
+          "max": 338.2,
+          "std_dev": 18.6,
+          "unit": "Radiometric Temperature (Kelvin)",
+          "agency_source": "NASA LRO Diviner vs NASA ECOSTRESS"
+        },
+        "slope": {
+          "mean": 14.1,
+          "max": 31.0,
+          "std_dev": 5.4,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "NASA LRO LOLA vs JAXA AW3D30 DEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Block-strewn basaltic 'a'a lava flows and rubbly volcanic margins exhibit radar backscatter (L-band CPR > 1.4) and boulder density distributions that accurately simulate blocky impact ejecta blankets bordering Shackleton rim crests.",
+        "breakdown": "Thermal environment is diametrically inverted: hyper-arid daytime solar heating exceeds 320 K (47°C), contrasting with the permanent 40 K cryogenic trap of Shackleton. Furthermore, sub-aerial oxidative patina (desert varnish) coats rock exteriors.",
+        "mitigation": "Restrict autonomous mobility trials to night-time testing; install thermal heat sinks on avionics to guard against desert overheating; focus test objectives strictly on hazard detection algorithms, stereo vision over dark basalt, and chassis wheel grouser wear."
+      }
+    },
+    "shackleton_sredinny": {
+      "target_id": "shackleton",
+      "analog_id": "sredinny",
+      "pair_title": "Shackleton Crater (Moon) ⟷ Tolbachik / Sredinny Range (Kamchatka)",
+      "scores": {
+        "slope": 88,
+        "radar_roughness": 82,
+        "thermal": 70,
+        "geochemical": 75
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 82, "radar_roughness": 76, "thermal": 94, "geochemical": 70 },
+        "analog": { "slope": 88, "radar_roughness": 82, "thermal": 70, "geochemical": 75 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.09,
+          "max": 0.22,
+          "std_dev": 0.04,
+          "unit": "Albedo / Surface Reflectance",
+          "agency_source": "NASA LROC NAC vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 1.48,
+          "max": 2.92,
+          "std_dev": 0.49,
+          "unit": "Backscatter Ratio (CPR / C-band dB)",
+          "agency_source": "NASA LRO Mini-RF vs CSA RADARSAT Constellation (RCM)"
+        },
+        "thermal": {
+          "mean": 248.0,
+          "max": 298.5,
+          "std_dev": 32.1,
+          "unit": "Radiometric Temperature (Kelvin)",
+          "agency_source": "NASA LRO Diviner vs NASA / USGS Landsat-9 TIRS-2"
+        },
+        "slope": {
+          "mean": 22.4,
+          "max": 35.8,
+          "std_dev": 7.9,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "NASA LRO LOLA vs ESA Copernicus GLO-30 DEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Pristine sub-aerial basaltic scoria and tephra fall deposits provide an exact geotechnical equivalent for lunar highland regolith. Unconsolidated particle grain size distribution (10 μm to 2 mm) reproduces high wheel slippage and abrasive dust clogging on mechanical joints.",
+        "breakdown": "Atmospheric moisture in volcanic plumes introduces trace hydrated sulfates and rapid oxidation of metallic iron, whereas lunar regolith contains nanophase iron (npFe0) produced by micrometeorite vapor deposition in hard vacuum.",
+        "mitigation": "Bake field-collected tephra in high-temperature vacuum desiccation ovens prior to actuator bench testing; evaluate rotary seal dust ingress using desiccated tephra slurries under low-humidity chambers."
+      }
+    },
+    "shackleton_tuktoyaktuk": {
+      "target_id": "shackleton",
+      "analog_id": "tuktoyaktuk",
+      "pair_title": "Shackleton Crater (Moon) ⟷ Tuktoyaktuk Pingos (Canada)",
+      "scores": {
+        "slope": 72,
+        "radar_roughness": 84,
+        "thermal": 92,
+        "geochemical": 78
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 82, "radar_roughness": 76, "thermal": 94, "geochemical": 70 },
+        "analog": { "slope": 72, "radar_roughness": 84, "thermal": 92, "geochemical": 78 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.18,
+          "max": 0.42,
+          "std_dev": 0.08,
+          "unit": "Albedo / Surface Reflectance",
+          "agency_source": "NASA LROC NAC vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 1.75,
+          "max": 3.40,
+          "std_dev": 0.61,
+          "unit": "Polarimetric CPR / Dielectric Contrast",
+          "agency_source": "NASA LRO Mini-RF S-band vs CSA RADARSAT-2 Polarimetric"
+        },
+        "thermal": {
+          "mean": 232.0,
+          "max": 272.5,
+          "std_dev": 24.6,
+          "unit": "Radiometric Temperature (Kelvin)",
+          "agency_source": "NASA LRO Diviner vs NASA Terra MODIS Arctic"
+        },
+        "slope": {
+          "mean": 15.3,
+          "max": 34.0,
+          "std_dev": 6.2,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "NASA LRO LOLA vs NGA / NSF ArcticDEM Micro-Slope"
+        }
+      },
+      "diagnostics": {
+        "match": "Massive segregated ground ice cores sealed beneath cryogenic permafrost closely simulate volatile ice lenses in permanently shadowed lunar polar cold traps. CPR radar dielectric contrast (>1.5) directly corroborates Mini-RF lunar ice detection models.",
+        "breakdown": "Summer seasonal thawing creates a muddy active layer and thermokarst slump lakes unknown on the frozen, airless lunar surface. Terrestrial gravity (1.0G vs 0.166G) drastically alters borehole wall collapse dynamics and cuttings removal.",
+        "mitigation": "Conduct all field drilling operations during arctic midwinter (-35°C to -45°C); fit drill rig with pneumatic weight-off-bit counterbalances set to 16.6% normal downforce to simulate low-gravity lunar coring physics."
+      }
+    },
+    "shackleton_lut-desert": {
+      "target_id": "shackleton",
+      "analog_id": "lut-desert",
+      "pair_title": "Shackleton Crater (Moon) ⟷ Lut Desert (Iran)",
+      "scores": {
+        "slope": 62,
+        "radar_roughness": 54,
+        "thermal": 80,
+        "geochemical": 50
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 82, "radar_roughness": 76, "thermal": 94, "geochemical": 70 },
+        "analog": { "slope": 62, "radar_roughness": 54, "thermal": 80, "geochemical": 50 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.22,
+          "max": 0.48,
+          "std_dev": 0.09,
+          "unit": "Albedo / Surface Reflectance",
+          "agency_source": "NASA LROC NAC vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 0.85,
+          "max": 1.72,
+          "std_dev": 0.31,
+          "unit": "Interferometric Backscatter (dB)",
+          "agency_source": "NASA LRO Mini-RF vs ESA Sentinel-1 C-SAR IW"
+        },
+        "thermal": {
+          "mean": 328.0,
+          "max": 343.8,
+          "std_dev": 22.4,
+          "unit": "Radiometric Temperature (Kelvin)",
+          "agency_source": "NASA LRO Diviner vs NASA EOS Aqua MODIS"
+        },
+        "slope": {
+          "mean": 19.8,
+          "max": 48.0,
+          "std_dev": 8.7,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "NASA LRO LOLA vs NASA JPL NASADEM Topography"
+        }
+      },
+      "diagnostics": {
+        "match": "Extreme zero-vegetation landscape with stark, razor-sharp optical shadow boundaries accurately models the high dynamic range optical contrast and deep shadows encountered by autonomous navigation vision systems on lunar ridges.",
+        "breakdown": "High-velocity atmospheric wind gusts (120-day summer wind) drive continuous saltation of rounded quartz grains, which are completely absent in the vacuum impact-shattered environment of the Moon.",
+        "mitigation": "Filter vision sensors for airborne dust; mount collimated spotlight arrays on the test rover to cast artificial hard-edged shadows at night, testing optical hazard avoidance algorithms in zero-ambient-light terrain."
+      }
+    },
+    "jezero_tablelands": {
+      "target_id": "jezero",
+      "analog_id": "tablelands",
+      "pair_title": "Jezero Crater Margin (Mars) ⟷ The Tablelands (Canada)",
+      "scores": {
+        "slope": 76,
+        "radar_roughness": 72,
+        "thermal": 68,
+        "geochemical": 94
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 64, "radar_roughness": 68, "thermal": 72, "geochemical": 89 },
+        "analog": { "slope": 76, "radar_roughness": 72, "thermal": 68, "geochemical": 94 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.19,
+          "max": 0.36,
+          "std_dev": 0.05,
+          "unit": "Surface Reflectance (VIS-NIR)",
+          "agency_source": "NASA MRO HiRISE vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 0.98,
+          "max": 2.15,
+          "std_dev": 0.38,
+          "unit": "Dielectric Sounding Roughness",
+          "agency_source": "ASI / NASA SHARAD vs CSA RADARSAT-2 C-band"
+        },
+        "thermal": {
+          "mean": 278.4,
+          "max": 298.1,
+          "std_dev": 12.3,
+          "unit": "Surface Brightness Temp (Kelvin)",
+          "agency_source": "NASA Mars Odyssey THEMIS vs NASA ECOSTRESS"
+        },
+        "slope": {
+          "mean": 16.5,
+          "max": 32.0,
+          "std_dev": 5.9,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "ESA / NASA MOLA-HRSC vs ESA Copernicus GLO-30 DEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Low-temperature serpentinization and carbonation of ultramafic peridotite provides an exceptional geochemical match for CRISM-detected magnesium carbonates, saponite clays, and olivine-bearing bedrock along the Jezero crater margin and Nili Fossae.",
+        "breakdown": "Terrestrial oceanic humidity, active rainfall runoff, and lichen/bryophyte biofilms create organic geochemical signatures and aqueous weathering crusts that are completely absent on cold, hyper-arid modern Mars.",
+        "mitigation": "Abrade 3–5 mm of weathered outer rock surfaces with a diamond micro-planer before spectroscopic analysis; apply Raman and deep-UV native fluorescence baseline subtraction to reject terrestrial biogenic humic acid false positives."
+      }
+    },
+    "jezero_harrat-khaybar": {
+      "target_id": "jezero",
+      "analog_id": "harrat-khaybar",
+      "pair_title": "Jezero Crater Margin (Mars) ⟷ Harrat Khaybar (Saudi Arabia)",
+      "scores": {
+        "slope": 70,
+        "radar_roughness": 84,
+        "thermal": 78,
+        "geochemical": 83
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 64, "radar_roughness": 68, "thermal": 72, "geochemical": 89 },
+        "analog": { "slope": 70, "radar_roughness": 84, "thermal": 78, "geochemical": 83 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.24,
+          "max": 0.42,
+          "std_dev": 0.07,
+          "unit": "Surface Reflectance (VIS-NIR)",
+          "agency_source": "NASA MRO HiRISE vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 1.42,
+          "max": 2.80,
+          "std_dev": 0.46,
+          "unit": "Dielectric Sounding Roughness",
+          "agency_source": "ASI / NASA SHARAD vs JAXA ALOS-2 PALSAR-2 L-band"
+        },
+        "thermal": {
+          "mean": 310.2,
+          "max": 336.5,
+          "std_dev": 16.4,
+          "unit": "Surface Brightness Temp (Kelvin)",
+          "agency_source": "NASA Mars Odyssey THEMIS vs NASA ECOSTRESS"
+        },
+        "slope": {
+          "mean": 13.8,
+          "max": 29.5,
+          "std_dev": 4.8,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "ESA / NASA MOLA-HRSC vs JAXA AW3D30 DEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Basaltic flow stratigraphy, columnar jointing, and intact lava tube networks accurately represent Noachian basaltic floor units underlying the Jezero sedimentary delta, offering realistic structural geometries for subsurface cavern exploration.",
+        "breakdown": "Lacks the fine-grained lacustrine clay-sandstone deltaic sequences that form the primary astrobiological target of the Perseverance rover. Diurnal temperature fluctuations are dominated by Earth's thick atmosphere rather than Martian radiative cooling.",
+        "mitigation": "Focus test trials on rover chassis rock-climbing kinematics over fractured basalt and autonomous navigation through dark lava tube skylights; augment payload with specialized lidar scanners for GPS-denied cavern mapping."
+      }
+    },
+    "jezero_sredinny": {
+      "target_id": "jezero",
+      "analog_id": "sredinny",
+      "pair_title": "Jezero Crater Margin (Mars) ⟷ Tolbachik / Sredinny Range (Kamchatka)",
+      "scores": {
+        "slope": 86,
+        "radar_roughness": 79,
+        "thermal": 66,
+        "geochemical": 72
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 64, "radar_roughness": 68, "thermal": 72, "geochemical": 89 },
+        "analog": { "slope": 86, "radar_roughness": 79, "thermal": 66, "geochemical": 72 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.14,
+          "max": 0.31,
+          "std_dev": 0.05,
+          "unit": "Surface Reflectance (VIS-NIR)",
+          "agency_source": "NASA MRO HiRISE vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 1.25,
+          "max": 2.65,
+          "std_dev": 0.41,
+          "unit": "Radar Surface Roughness Index",
+          "agency_source": "ASI / NASA SHARAD vs CSA RADARSAT Constellation (RCM)"
+        },
+        "thermal": {
+          "mean": 252.1,
+          "max": 294.0,
+          "std_dev": 28.5,
+          "unit": "Surface Brightness Temp (Kelvin)",
+          "agency_source": "NASA Mars Odyssey THEMIS vs NASA / USGS Landsat-9 TIRS-2"
+        },
+        "slope": {
+          "mean": 21.0,
+          "max": 36.4,
+          "std_dev": 7.4,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "ESA / NASA MOLA-HRSC vs ESA Copernicus GLO-30 DEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Volcaniclastic debris fans, steep cinder embankments, and basaltic ash match the geotechnical slope stability and traction challenges encountered when navigating the steep delta front scarps and crater rim gullies of Jezero.",
+        "breakdown": "Active volcanic fumaroles vent corrosive SO2 and steam, generating hydrothermal acid-sulfate alteration that creates jarosite and alunite rather than the alkaline neutral-pH smectite clays characteristic of Jezero's lake basin.",
+        "mitigation": "Isolate mechanical mobility validation from geochemical sampling objectives; test wheel slip control algorithms on steep 20° cinder slopes; purge rover wheels with dry air blasts to clear abrasive dust."
+      }
+    },
+    "jezero_tuktoyaktuk": {
+      "target_id": "jezero",
+      "analog_id": "tuktoyaktuk",
+      "pair_title": "Jezero Crater Margin (Mars) ⟷ Tuktoyaktuk Pingos (Canada)",
+      "scores": {
+        "slope": 65,
+        "radar_roughness": 71,
+        "thermal": 74,
+        "geochemical": 77
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 64, "radar_roughness": 68, "thermal": 72, "geochemical": 89 },
+        "analog": { "slope": 65, "radar_roughness": 71, "thermal": 74, "geochemical": 77 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.20,
+          "max": 0.38,
+          "std_dev": 0.06,
+          "unit": "Surface Reflectance (VIS-NIR)",
+          "agency_source": "NASA MRO HiRISE vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 1.10,
+          "max": 2.45,
+          "std_dev": 0.37,
+          "unit": "Sounding Radar Dielectric Metric",
+          "agency_source": "ASI / NASA SHARAD vs CSA RADARSAT-2 Polarimetric"
+        },
+        "thermal": {
+          "mean": 235.4,
+          "max": 274.0,
+          "std_dev": 22.8,
+          "unit": "Surface Brightness Temp (Kelvin)",
+          "agency_source": "NASA Mars Odyssey THEMIS vs NASA Terra MODIS"
+        },
+        "slope": {
+          "mean": 14.8,
+          "max": 33.2,
+          "std_dev": 5.8,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "ESA / NASA MOLA-HRSC vs NGA / NSF ArcticDEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Cryogenic thermal regime, permafrost polygon cracks, and ground ice dome swelling provide a strong physical analog for Martian periglacial landforms and relict paleolake floor ice lenses observed in high-latitude Martian craters.",
+        "breakdown": "Thick organic peat and moss layers blanket the arctic sediment, whereas Mars is completely sterile with an oxidizing regolith rich in perchlorates (ClO4-) and lacking free organic carbon.",
+        "mitigation": "Equip coring drills with organic-free stainless steel sampling bits; spike laboratory reference samples with 0.5% magnesium perchlorate to test drill cutting vitrification under realistic Martian chemical kinetics."
+      }
+    },
+    "jezero_lut-desert": {
+      "target_id": "jezero",
+      "analog_id": "lut-desert",
+      "pair_title": "Jezero Crater Margin (Mars) ⟷ Lut Desert (Iran)",
+      "scores": {
+        "slope": 82,
+        "radar_roughness": 69,
+        "thermal": 86,
+        "geochemical": 74
+      },
+      "radar_chart_vectors": {
+        "target": { "slope": 64, "radar_roughness": 68, "thermal": 72, "geochemical": 89 },
+        "analog": { "slope": 82, "radar_roughness": 69, "thermal": 86, "geochemical": 74 }
+      },
+      "sensor_stats": {
+        "optical": {
+          "mean": 0.28,
+          "max": 0.52,
+          "std_dev": 0.08,
+          "unit": "Surface Reflectance (VIS-NIR)",
+          "agency_source": "NASA MRO HiRISE vs ESA Sentinel-2 MSI"
+        },
+        "sar": {
+          "mean": 0.92,
+          "max": 1.88,
+          "std_dev": 0.33,
+          "unit": "Dielectric Sounding Roughness",
+          "agency_source": "ASI / NASA SHARAD vs ESA Sentinel-1 C-SAR IW"
+        },
+        "thermal": {
+          "mean": 322.0,
+          "max": 343.8,
+          "std_dev": 19.5,
+          "unit": "Surface Brightness Temp (Kelvin)",
+          "agency_source": "NASA Mars Odyssey THEMIS vs NASA EOS Aqua MODIS"
+        },
+        "slope": {
+          "mean": 18.2,
+          "max": 45.0,
+          "std_dev": 7.8,
+          "unit": "Topographic Slope (Degrees)",
+          "agency_source": "ESA / NASA MOLA-HRSC vs NASA JPL NASADEM"
+        }
+      },
+      "diagnostics": {
+        "match": "Spectacular kilometer-scale yardangs carved by wind into indurated lacustrine clay-siltstones are a near-perfect morphological and aerodynamic analog for wind-sculpted delta remnants, inverted channels, and aeolian deflation corridors at Jezero.",
+        "breakdown": "Terrestrial air density (1.2 kg/m³) is ~70 times denser than Mars' 6 mbar CO2 atmosphere (0.015 kg/m³), meaning wind velocities required to mobilize saltating grains on Mars (~30 m/s) are much higher than in the Lut Desert.",
+        "mitigation": "Apply aerodynamic scaling factors: scale effective particle shear stress by (rho_Earth / rho_Mars)^0.5 when modeling rover wheel trenching and sand trap hazards across inter-yardang sand corridors."
+      }
+    }
+  }
+}

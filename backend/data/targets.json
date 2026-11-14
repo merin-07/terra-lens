@@ -1,0 +1,106 @@
+{
+  "planetary_targets": [
+    {
+      "id": "shackleton",
+      "name": "Shackleton Crater & Connecting Ridge",
+      "body": "Moon",
+      "coordinates": "89.9°S, 0.0°E",
+      "latitude": -89.9,
+      "longitude": 0.0,
+      "elevation": "-4.2 km (floor) to +1.2 km (rim crest)",
+      "geologic_setting": "South Pole-Aitken (SPA) basin rim volatile trap. Characterized by 21-km diameter impact crater with permanently shadowed interior cold-traps (<40 K) bordered by elevated illumination peaks along the Connecting Ridge receiving >80% annual sunlight.",
+      "primary_challenges": ["Permanent cryogenic shadow", "Extreme low-sun incident lighting", "Abrasive angular anorthositic regolith", "Steep 30° crater wall traverses"],
+      "baseline_profile": {
+        "slope": 82,
+        "radar_roughness": 76,
+        "thermal": 94,
+        "geochemical": 70
+      },
+      "layers": {
+        "optical": {
+          "name": "LROC Narrow Angle Camera (NAC)",
+          "agency": "NASA LRO",
+          "path": "/data/moon/shackleton/optical/shackleton_preview_cropped.png",
+          "resolution": "0.5 m/px",
+          "wavelength": "Visible (400–750 nm)",
+          "description": "Sub-meter orbital optical imagery capturing high-contrast shadow-delineated ridge lines and crater rim morphology."
+        },
+        "sar": {
+          "name": "Mini-RF S-band SAR (CPR)",
+          "agency": "NASA / ISRO Chandrayaan-1 / LRO",
+          "path": "/data/moon/shackleton/sar/preview.png",
+          "resolution": "7.5 m/px",
+          "wavelength": "S-band (12.6 cm, 2.38 GHz)",
+          "description": "Circular Polarization Ratio (CPR) radar backscatter mapping subsurface volumetric ice scattering and surface blockiness."
+        },
+        "thermal": {
+          "name": "Diviner Lunar Radiometer Experiment",
+          "agency": "NASA LRO",
+          "path": "/data/moon/shackleton/thermal/preview.png",
+          "resolution": "200 m/px",
+          "wavelength": "Thermal IR (Channel 8, 50–100 μm)",
+          "description": "Cryogenic brightness temperature mapping resolving micro-cold traps capable of preserving volatile water ice at 40 K."
+        },
+        "slope": {
+          "name": "LOLA Topographic Slope Model",
+          "agency": "NASA LRO LOLA",
+          "path": "/data/moon/shackleton/slope/preview.png",
+          "resolution": "5 m/px",
+          "wavelength": "Near-IR Laser Altimetry (1064 nm)",
+          "description": "Digital elevation model derived slope gradients identifying navigable 8° ridge saddles vs hazardous 32° inner wall scarps."
+        }
+      }
+    },
+    {
+      "id": "jezero",
+      "name": "Jezero Crater Margin & Nili Fossae",
+      "body": "Mars",
+      "coordinates": "18.38°N, 77.58°E",
+      "latitude": 18.38,
+      "longitude": 77.58,
+      "elevation": "-2.5 km (crater floor) to -1.8 km (crater rim)",
+      "geologic_setting": "Western Isidis Planitia impact basin margin. Features an ancient Noachian/Hesperian fluvio-lacustrine open-basin lake fed by Neretva and Sava Valles, with a preserved smectite- and Mg-carbonate-bearing river delta scarp.",
+      "primary_challenges": ["Delta front scarp step-offs", "Unconsolidated aeolian megaripples", "Abrasive iron-oxide dust saltation", "Diurnal atmospheric pressure swings"],
+      "baseline_profile": {
+        "slope": 64,
+        "radar_roughness": 68,
+        "thermal": 72,
+        "geochemical": 89
+      },
+      "layers": {
+        "optical": {
+          "name": "HiRISE High-Resolution Imaging",
+          "agency": "NASA MRO",
+          "path": "/data/mars/jezero/optical/preview.png",
+          "resolution": "0.25 m/px",
+          "wavelength": "Color VIS-NIR (500–1000 nm)",
+          "description": "Ultra-high resolution optical imaging resolving decimeter-scale delta bottomset/foreset bedding and inverted paleochannels."
+        },
+        "sar": {
+          "name": "SHARAD Sounding Radar Roughness",
+          "agency": "ASI / NASA MRO",
+          "path": "/data/mars/jezero/sar/preview.png",
+          "resolution": "15 m/px",
+          "wavelength": "HF Radar (15–25 MHz)",
+          "description": "Decametric radar surface roughness and dielectric interface transitions between delta sandstones and basaltic floor unit."
+        },
+        "thermal": {
+          "name": "THEMIS Nighttime Thermal Infrared",
+          "agency": "NASA Mars Odyssey",
+          "path": "/data/mars/jezero/thermal/preview.png",
+          "resolution": "100 m/px",
+          "wavelength": "Multi-band IR (Band 9, 12.57 μm)",
+          "description": "Apparent thermal inertia differentiating indurated deltaic sandstones and carbonates from loose sand and airfall dust."
+        },
+        "slope": {
+          "name": "MOLA / HRSC High-Resolution Topography",
+          "agency": "ESA Mars Express / NASA MGS",
+          "path": "/data/mars/jezero/slope/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "Stereo Photogrammetry & Laser Altimetry",
+          "description": "Topographic slope and elevation contours mapping delta scarp grades (12°–18°) and gentle crater floor traverse corridors."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "earth_analogs": [
+    {
+      "id": "tablelands",
+      "name": "The Tablelands",
+      "formal_name": "Tablelands Ultramafic Massif, Gros Morne National Park",
+      "country": "Canada",
+      "region": "Newfoundland",
+      "coordinates": "49.46°N, 57.95°W",
+      "latitude": 49.46,
+      "longitude": -57.95,
+      "elevation": "500–700 m a.s.l.",
+      "climate": "Sub-boreal alpine barrens / oceanic maritime",
+      "lithology": "Serpentinized mantle peridotite (harzburgite and dunite)",
+      "geologic_context": "Exposed section of Earth's oceanic mantle obducted during the Ordovician Taconic Orogeny. Due to toxic heavy metals (Ni, Cr, Co) and extreme Ca/Mg deficiency, the plateau is completely devoid of boreal tree canopy, exposing bare, fractured ultramafic bedrock.",
+      "mission_relevance": "Premier analog for Martian magnesium-carbonate formation, serpentinization-driven hydrogen generation, and rocky rover mobility over fractured blocks.",
+      "layers": {
+        "optical": {
+          "name": "Sentinel-2 MSI Level-2A",
+          "agency": "ESA Copernicus",
+          "path": "/data/earth/tablelands/optical/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "B2/B3/B4 (Visible RGB)",
+          "description": "True-color multispectral mosaic showing distinct orange-ocher peridotite weathering rinds and absence of vegetation."
+        },
+        "sar": {
+          "name": "RADARSAT-2 Fine Beam SAR",
+          "agency": "CSA / MDA",
+          "path": "/data/earth/tablelands/sar/preview.png",
+          "resolution": "8 m/px",
+          "wavelength": "C-band (5.4 GHz, 5.6 cm)",
+          "description": "Surface roughness backscatter mapping of fractured talus aprons, blocky scree, and jointed bedrock pavement."
+        },
+        "thermal": {
+          "name": "ECOSTRESS Land Surface Temperature",
+          "agency": "NASA JPL / ISS",
+          "path": "/data/earth/tablelands/thermal/preview.png",
+          "resolution": "70 m/px",
+          "wavelength": "TIR (8–12.5 μm)",
+          "description": "Diurnal radiometric thermal response mapping thermal inertia differences between peridotite bedrock and bog valleys."
+        },
+        "slope": {
+          "name": "Copernicus GLO-30 DEM Slope",
+          "agency": "ESA",
+          "path": "/data/earth/tablelands/slope/preview.png",
+          "resolution": "30 m/px",
+          "wavelength": "InSAR Topography",
+          "description": "Topographic slope profile mapping the 28° canyon wall scarps of Trout River Pond and gentle plateau summit."
+        }
+      }
+    },
+    {
+      "id": "harrat-khaybar",
+      "name": "Harrat Khaybar Lava Field",
+      "formal_name": "Harrat Khaybar Volcanic Field",
+      "country": "Saudi Arabia",
+      "region": "Al Madinah Province",
+      "coordinates": "25.68°N, 39.95°E",
+      "latitude": 25.68,
+      "longitude": 39.95,
+      "elevation": "700–2,093 m a.s.l.",
+      "climate": "Hyper-arid subtropical desert",
+      "lithology": "Alkali olivine basalt, hawaiite, and comenditic rhyolite domes",
+      "geologic_context": "One of Saudi Arabia's largest volcanic fields, spanning 14,000 km² along the Makkah-Madinah-Nafud volcanic line. Features white comendite domes (Jabal Abyad), deep volcanic pit craters, extensive basaltic 'a'a flow fields, and well-preserved lava tubes.",
+      "mission_relevance": "Key terrestrial analog for lunar and Martian basaltic volcanism, lava tube exploration, subsurface robotic shelter ingress, and rugged wheel traction over blocky basalt.",
+      "layers": {
+        "optical": {
+          "name": "Sentinel-2 MSI Level-2A",
+          "agency": "ESA Copernicus",
+          "path": "/data/earth/harrat-khaybar/optical/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "B2/B3/B4 (Visible RGB)",
+          "description": "High-contrast multispectral imaging highlighting dark basalt flows against rare white felsic tuff and scoria cones."
+        },
+        "sar": {
+          "name": "ALOS-2 PALSAR-2 L-band SAR",
+          "agency": "JAXA",
+          "path": "/data/earth/harrat-khaybar/sar/preview.png",
+          "resolution": "6 m/px",
+          "wavelength": "L-band (23.6 cm, 1.2 GHz)",
+          "description": "Deep-penetrating L-band SAR backscatter highlighting sharp dielectric contrast between rubbly blocky flows and smooth pahoehoe."
+        },
+        "thermal": {
+          "name": "ECOSTRESS Surface Temperature",
+          "agency": "NASA JPL / ISS",
+          "path": "/data/earth/harrat-khaybar/thermal/preview.png",
+          "resolution": "70 m/px",
+          "wavelength": "TIR (8.7–12.0 μm)",
+          "description": "Thermal emissivity and inertia measurements resolving rapid cooling of basalt lava crusts vs insulated lava tube cavities."
+        },
+        "slope": {
+          "name": "ALOS AW3D30 Topographic Slope",
+          "agency": "JAXA",
+          "path": "/data/earth/harrat-khaybar/slope/preview.png",
+          "resolution": "30 m/px",
+          "wavelength": "Optical Stereo DEM",
+          "description": "Digital elevation model derived slope gradients identifying 30° cinder cone slopes and collapsed lava tube skylights."
+        }
+      }
+    },
+    {
+      "id": "sredinny",
+      "name": "Tolbachik / Sredinny Range",
+      "formal_name": "Tolbachinsky Dol Volcanic Field, Kamchatka",
+      "country": "Russia",
+      "region": "Kamchatka Peninsula",
+      "coordinates": "55.83°N, 160.33°E",
+      "latitude": 55.83,
+      "longitude": 160.33,
+      "elevation": "1,200–3,682 m a.s.l.",
+      "climate": "Sub-polar volcanic tundra / alpine sub-arctic",
+      "lithology": "High-alumina basalt, magnesian basaltic scoria, and pyroclastic tephra",
+      "geologic_context": "Vast cinder cone field formed during the Great Tolbachik Fissure Eruptions (1975–76 and 2012–13). Unvegetated black volcanic ash plains, rugged scoria cones, and fresh basalt block fields simulate virgin extraterrestrial regolith fields.",
+      "mission_relevance": "Historically utilized for Soviet Lunokhod lunar rover trials; excellent analog for regolith geotechnical shear strength, wheel sinkage, and abrasive volcanic dust testing.",
+      "layers": {
+        "optical": {
+          "name": "Sentinel-2 MSI Level-2A",
+          "agency": "ESA Copernicus",
+          "path": "/data/earth/sredinny/optical/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "B2/B3/B4 (Visible RGB)",
+          "description": "Multispectral imagery of expansive black basaltic scoria plains, red cinder cones, and seasonal snow patches."
+        },
+        "sar": {
+          "name": "RADARSAT Constellation Mission (RCM)",
+          "agency": "CSA",
+          "path": "/data/earth/sredinny/sar/preview.png",
+          "resolution": "5 m/px",
+          "wavelength": "C-band (5.4 GHz)",
+          "description": "High-resolution polarimetric SAR backscatter discerning loose fine-grained tephra deposits from coherent basalt lava flows."
+        },
+        "thermal": {
+          "name": "Landsat-9 TIRS-2 Thermal Infrared",
+          "agency": "NASA / USGS",
+          "path": "/data/earth/sredinny/thermal/preview.png",
+          "resolution": "100 m/px",
+          "wavelength": "TIR Band 10 (10.8 μm)",
+          "description": "Thermal IR mapping showing residual geothermal anomalies along fissure vents against sub-zero volcanic tundra backgrounds."
+        },
+        "slope": {
+          "name": "Copernicus GLO-30 DEM Slope",
+          "agency": "ESA",
+          "path": "/data/earth/sredinny/slope/preview.png",
+          "resolution": "30 m/px",
+          "wavelength": "InSAR Topography",
+          "description": "Topographic slope profile mapping the 25°–35° scoria cone flanks and low-grade cinder plain traverse corridors."
+        }
+      }
+    },
+    {
+      "id": "tuktoyaktuk",
+      "name": "Tuktoyaktuk Pingos",
+      "formal_name": "Ibyuk & Split Hill Pingo Complex, Mackenzie Delta",
+      "country": "Canada",
+      "region": "Northwest Territories",
+      "coordinates": "69.44°N, 133.03°W",
+      "latitude": 69.44,
+      "longitude": -133.03,
+      "elevation": "0–50 m a.s.l.",
+      "climate": "Continuous arctic permafrost / polar tundra",
+      "lithology": "Massive segregated pure ground ice cores beneath lacustrine silts and peat",
+      "geologic_context": "Home to the world's second-highest pingo concentration (~1,350 pingos) including Ibyuk Pingo (50 m high). Formed by hydrostatic pressure in drained thermokarst lake basins forcing cryogenic water up to freeze into massive subsurface ice domes.",
+      "mission_relevance": "Premier analog for planetary cryo-drilling, ground ice extraction, subsurface sounding radar calibration, and polygonal ice-wedge terrain mobility.",
+      "layers": {
+        "optical": {
+          "name": "Sentinel-2 MSI Level-2A",
+          "agency": "ESA Copernicus",
+          "path": "/data/earth/tuktoyaktuk/optical/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "B2/B3/B4 (Visible RGB)",
+          "description": "Visible spectrum imaging showing distinctive conical pingo hills, collapsed summit craters, and thaw lake networks."
+        },
+        "sar": {
+          "name": "RADARSAT-2 Polarimetric SAR",
+          "agency": "CSA / MDA",
+          "path": "/data/earth/tuktoyaktuk/sar/preview.png",
+          "resolution": "8 m/px",
+          "wavelength": "C-band (5.4 GHz)",
+          "description": "Polarimetric SAR scattering resolving dielectric contrast between frozen permafrost ground, thermokarst water, and pingo summits."
+        },
+        "thermal": {
+          "name": "MODIS Land Surface Temperature",
+          "agency": "NASA Terra",
+          "path": "/data/earth/tuktoyaktuk/thermal/preview.png",
+          "resolution": "1000 m/px",
+          "wavelength": "TIR (11.0 μm)",
+          "description": "Regional arctic radiometric thermal profile tracking seasonal permafrost freeze-up and cryogenic skin temperatures."
+        },
+        "slope": {
+          "name": "ArcticDEM Micro-Topography Slope",
+          "agency": "NGA / NSF",
+          "path": "/data/earth/tuktoyaktuk/slope/preview.png",
+          "resolution": "2 m/px",
+          "wavelength": "High-Res Photogrammetry",
+          "description": "Ultra-precise micro-slope model detailing steep 35° pingo flank inclinations and surrounding flat polygon marshland."
+        }
+      }
+    },
+    {
+      "id": "lut-desert",
+      "name": "Lut Desert Mega-Yardangs",
+      "formal_name": "Dasht-e Lut Yardang Field ('Kaluts')",
+      "country": "Iran",
+      "region": "Kerman & Sistan-Baluchestan",
+      "coordinates": "30.57°N, 58.38°E",
+      "latitude": 30.57,
+      "longitude": 58.38,
+      "elevation": "116–300 m a.s.l.",
+      "climate": "Hyper-arid subtropical continental interior",
+      "lithology": "Indurated lacustrine clay-siltstone, gypsum evaporites, and basaltic hamada gravel",
+      "geologic_context": "Site of the highest radiometric land surface temperatures recorded by MODIS (70.7°C / 343.8 K). Massive wind-carved yardang ridges ('Kaluts') stretch over 120 km, shaped by unidirectional 120-day summer gales blowing across dry saline lakebeds.",
+      "mission_relevance": "Direct morphologic and aerodynamic analog for Martian wind-sculpted yardangs, inverted fluvio-deltaic channels, extreme thermal cycling, and rover traverse over cohesive clay pavements.",
+      "layers": {
+        "optical": {
+          "name": "Sentinel-2 MSI Level-2A",
+          "agency": "ESA Copernicus",
+          "path": "/data/earth/lut-desert/optical/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "B2/B3/B4 (Visible RGB)",
+          "description": "Multispectral imagery of parallel, aerodynamically streamlined yardang ridges separated by wind-swept deflation corridors."
+        },
+        "sar": {
+          "name": "Sentinel-1 C-SAR IW",
+          "agency": "ESA Copernicus",
+          "path": "/data/earth/lut-desert/sar/preview.png",
+          "resolution": "10 m/px",
+          "wavelength": "C-band (5.4 GHz)",
+          "description": "Interferometric SAR backscatter mapping structural orientation of wind flutes, salt crust roughness, and sand drift boundaries."
+        },
+        "thermal": {
+          "name": "MODIS / Aqua Land Surface Temp",
+          "agency": "NASA EOS",
+          "path": "/data/earth/lut-desert/thermal/preview.png",
+          "resolution": "1000 m/px",
+          "wavelength": "TIR (11–12 μm)",
+          "description": "Extreme thermal radiance measurements documenting intense diurnal temperature excursions exceeding 70°C."
+        },
+        "slope": {
+          "name": "NASADEM Topographic Slope",
+          "agency": "NASA JPL",
+          "path": "/data/earth/lut-desert/slope/preview.png",
+          "resolution": "30 m/px",
+          "wavelength": "SRTM C-band InSAR",
+          "description": "Topographic slope profile mapping vertical yardang cliff drop-offs (40°–60°) and flat inter-yardang sand highway corridors."
+        }
+      }
+    }
+  ]
+}

@@ -1,34 +1,59 @@
 {
   "project": "TERRA-LENS",
-  "version": "0.1",
-  "notice": "Starter structure only. No scientific measurements or similarity scores have been populated.",
+  "version": "1.0",
   "sensor_layers": [
     "optical",
     "sar",
     "thermal",
-    "topography"
+    "slope"
   ],
   "planetary_targets": [
     {
-      "id": "moon",
+      "id": "shackleton",
       "body": "Moon",
-      "locations": ["Shackleton Crater", "Connecting Ridge"],
+      "name": "Shackleton Crater & Connecting Ridge",
+      "coordinates": "89.9°S, 0.0°E",
       "layers": {
-        "optical": {"source": "LROC", "asset": null},
-        "sar": {"source": "LRO Mini-RF", "asset": null},
-        "thermal": {"source": "LRO Diviner", "asset": null},
-        "topography": {"source": "LRO LOLA", "asset": null}
+        "optical": {
+          "source": "NASA LROC NAC",
+          "asset": "/data/moon/shackleton/optical/shackleton_preview_cropped.png"
+        },
+        "sar": {
+          "source": "NASA / ISRO Mini-RF",
+          "asset": "/data/moon/shackleton/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA LRO Diviner",
+          "asset": "/data/moon/shackleton/thermal/preview.png"
+        },
+        "slope": {
+          "source": "NASA LRO LOLA",
+          "asset": "/data/moon/shackleton/slope/preview.png"
+        }
       }
     },
     {
-      "id": "mars",
+      "id": "jezero",
       "body": "Mars",
-      "locations": ["Jezero Crater Margin", "Nili Fossae"],
+      "name": "Jezero Crater Margin & Nili Fossae",
+      "coordinates": "18.38°N, 77.58°E",
       "layers": {
-        "optical": {"source": "Mars HiRISE", "asset": null},
-        "sar": {"source": "Radar dataset to be selected", "asset": null},
-        "thermal": {"source": "Mars THEMIS", "asset": null},
-        "topography": {"source": "Mars MOLA", "asset": null}
+        "optical": {
+          "source": "NASA MRO HiRISE",
+          "asset": "/data/mars/jezero/optical/preview.png"
+        },
+        "sar": {
+          "source": "ASI / NASA SHARAD",
+          "asset": "/data/mars/jezero/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA Mars Odyssey THEMIS",
+          "asset": "/data/mars/jezero/thermal/preview.png"
+        },
+        "slope": {
+          "source": "ESA / NASA MOLA-HRSC",
+          "asset": "/data/mars/jezero/slope/preview.png"
+        }
       }
     }
   ],
@@ -37,60 +62,120 @@
       "id": "tablelands",
       "name": "The Tablelands",
       "region": "Newfoundland, Canada",
-      "coordinates": [-57.73, 49.59],
+      "coordinates": [-57.95, 49.46],
       "layers": {
-        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
-        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
-        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
-        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+        "optical": {
+          "source": "ESA Sentinel-2 MSI",
+          "asset": "/data/earth/tablelands/optical/preview.png"
+        },
+        "sar": {
+          "source": "CSA RADARSAT-2",
+          "asset": "/data/earth/tablelands/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA ECOSTRESS",
+          "asset": "/data/earth/tablelands/thermal/preview.png"
+        },
+        "slope": {
+          "source": "ESA Copernicus DEM",
+          "asset": "/data/earth/tablelands/slope/preview.png"
+        }
       }
     },
     {
-      "id": "harrat_khaybar",
+      "id": "harrat-khaybar",
       "name": "Harrat Khaybar",
       "region": "Saudi Arabia",
-      "coordinates": [39.9, 25.7],
+      "coordinates": [39.95, 25.68],
       "layers": {
-        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
-        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
-        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
-        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+        "optical": {
+          "source": "ESA Sentinel-2 MSI",
+          "asset": "/data/earth/harrat-khaybar/optical/preview.png"
+        },
+        "sar": {
+          "source": "JAXA ALOS-2 PALSAR-2",
+          "asset": "/data/earth/harrat-khaybar/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA ECOSTRESS",
+          "asset": "/data/earth/harrat-khaybar/thermal/preview.png"
+        },
+        "slope": {
+          "source": "JAXA AW3D30 DEM",
+          "asset": "/data/earth/harrat-khaybar/slope/preview.png"
+        }
       }
     },
     {
-      "id": "tolbachik",
-      "name": "Sredinny Range / Tolbachik",
+      "id": "sredinny",
+      "name": "Tolbachik / Sredinny Range",
       "region": "Kamchatka, Russia",
       "coordinates": [160.33, 55.83],
       "layers": {
-        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
-        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
-        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
-        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+        "optical": {
+          "source": "ESA Sentinel-2 MSI",
+          "asset": "/data/earth/sredinny/optical/preview.png"
+        },
+        "sar": {
+          "source": "CSA RADARSAT Constellation (RCM)",
+          "asset": "/data/earth/sredinny/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA / USGS Landsat-9 TIRS-2",
+          "asset": "/data/earth/sredinny/thermal/preview.png"
+        },
+        "slope": {
+          "source": "ESA Copernicus DEM",
+          "asset": "/data/earth/sredinny/slope/preview.png"
+        }
       }
     },
     {
       "id": "tuktoyaktuk",
       "name": "Tuktoyaktuk Pingos",
-      "region": "Northwest Territories, Canada",
-      "coordinates": [-133.04, 69.44],
+      "region": "NWT, Canada",
+      "coordinates": [-133.03, 69.44],
       "layers": {
-        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
-        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
-        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
-        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+        "optical": {
+          "source": "ESA Sentinel-2 MSI",
+          "asset": "/data/earth/tuktoyaktuk/optical/preview.png"
+        },
+        "sar": {
+          "source": "CSA RADARSAT-2 Polarimetric",
+          "asset": "/data/earth/tuktoyaktuk/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA Terra MODIS",
+          "asset": "/data/earth/tuktoyaktuk/thermal/preview.png"
+        },
+        "slope": {
+          "source": "NGA / NSF ArcticDEM",
+          "asset": "/data/earth/tuktoyaktuk/slope/preview.png"
+        }
       }
     },
     {
-      "id": "lut_desert",
-      "name": "Lut Desert Yardangs",
+      "id": "lut-desert",
+      "name": "Lut Desert Mega-Yardangs",
       "region": "Iran",
-      "coordinates": [59.0, 29.8],
+      "coordinates": [58.38, 30.57],
       "layers": {
-        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
-        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
-        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
-        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+        "optical": {
+          "source": "ESA Sentinel-2 MSI",
+          "asset": "/data/earth/lut-desert/optical/preview.png"
+        },
+        "sar": {
+          "source": "ESA Sentinel-1 C-SAR",
+          "asset": "/data/earth/lut-desert/sar/preview.png"
+        },
+        "thermal": {
+          "source": "NASA EOS Aqua MODIS",
+          "asset": "/data/earth/lut-desert/thermal/preview.png"
+        },
+        "slope": {
+          "source": "NASA JPL NASADEM",
+          "asset": "/data/earth/lut-desert/slope/preview.png"
+        }
       }
     }
   ]
