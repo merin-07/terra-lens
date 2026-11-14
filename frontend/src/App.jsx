@@ -1,6 +1,7 @@
 import EarthMap from "./EarthMap";
 import { useState } from "react";
 import analogData from "./data/analogs_data.json";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import {
   Globe2,
   Moon,
@@ -222,9 +223,57 @@ function App() {
               </div>
 
               <div className="map-placeholder lunar">
-                <Moon size={54} />
+                {target === "Moon" ? (                             
+                  <TransformWrapper
+                   initialScale={1}
+                   minScale={1}
+                   maxScale={6}
+                   centerOnInit
+                   limitToBounds
+                   wheel={{ step: 0.2 }}
+                   doubleClick={{ mode: "reset" }}
+                   panning={{ velocityDisabled: true }}
+                 >
+                   <TransformComponent
+                     wrapperStyle={{
+                       width: "100%",
+                       height: "170px",
+                       overflow: "hidden",
+                       borderRadius: "6px",
+                      touchAction: "none"
+                     }}
+                     contentStyle={{
+                       width: "100%",
+                       height: "170px"
+                     }}
+                   >
+                     <img
+                       src="/data/moon/shackleton/optical/shackleton_preview_cropped.png"
+                       alt="LROC optical imagery of Shackleton Crater"
+                       style={{
+                         width: "100%",
+                         height: "170px",
+                         objectFit: "contain",
+                         display: "block",
+                         maxWidth: "none"
+                       }}
+                     />
+                   </TransformComponent>
+                 </TransformWrapper>
+
+
+                ) : (
+                 <Moon size={54} />
+                )}
+
+
                 <span>{target.toUpperCase()} TERRAIN</span>
-                <small>Planetary imagery will appear here</small>
+
+                <small>
+                  {target === "Moon"
+                    ? "NASA LROC · Shackleton Crater · Optical"
+                    : "Planetary imagery will appear here"}
+               </small>
               </div>
             </div>
 

@@ -251,30 +251,50 @@ select {
   font-size: 13px;
 }
 
+
 .map-placeholder {
   height: 230px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   color: #a9b9c7;
+  overflow: hidden;
 }
 
 .map-placeholder span {
   font-size: 11px;
   letter-spacing: 2px;
+  flex-shrink: 0;
 }
 
 .map-placeholder small {
   color: #8796a9;
   font-size: 11px;
+  flex-shrink: 0;
 }
 
 .lunar {
   background: radial-gradient(circle at 50% 45%, #59636c, #303a45 60%, #172431);
 }
+
+.map-panel .map-placeholder.lunar .planetary-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 145px;
+  object-fit: contain;
+  flex-shrink: 1;
+  min-height: 0;
+  margin: 0 auto;
+}
+
 
 .earth {
   background: radial-gradient(circle at 50% 45%, #466d63, #263f42 60%, #172c36);
@@ -424,4 +444,13 @@ footer {
   .layer-info {
     grid-template-columns: 1fr;
   }
+}
+
+.map-placeholder.lunar {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.map-placeholder.lunar .react-transform-wrapper {
+  flex-shrink: 0;
 }
