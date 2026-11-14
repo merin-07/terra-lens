@@ -368,6 +368,28 @@ function App() {
                 <span>MISSION PRESETS & CRITERIA WEIGHTS</span>
               </div>
 
+              {/* Target Selector Toggle */}
+              <div className="target-toggle-pills">
+                <button
+                  className={`target-pill ${targetBody === "Moon" ? "active" : ""}`}
+                  onClick={() => {
+                    setTargetBody("Moon");
+                    setTargetLocation("Shackleton Crater");
+                  }}
+                >
+                  <Moon size={13} /> Moon: Shackleton
+                </button>
+                <button
+                  className={`target-pill ${targetBody === "Mars" ? "active" : ""}`}
+                  onClick={() => {
+                    setTargetBody("Mars");
+                    setTargetLocation("Jezero Crater Margin");
+                  }}
+                >
+                  <Satellite size={13} /> Mars: Jezero
+                </button>
+              </div>
+
               {/* Presets */}
               <div className="presets-row">
                 {MISSION_PRESETS.map((p) => (
@@ -470,6 +492,14 @@ function App() {
                       <div className="ranked-item-details">
                         <strong>{item.name}</strong>
                         <span>{item.region}</span>
+
+                        {/* Category breakdown bars */}
+                        <div className="mini-score-bars">
+                          <span title={`Slope: ${item.scores?.slope}%`}>SLO {item.scores?.slope}%</span>
+                          <span title={`SAR: ${item.scores?.radar_roughness}%`}>SAR {item.scores?.radar_roughness}%</span>
+                          <span title={`Thermal: ${item.scores?.thermal}%`}>THE {item.scores?.thermal}%</span>
+                          <span title={`Geochem: ${item.scores?.geochemical}%`}>GEO {item.scores?.geochemical}%</span>
+                        </div>
                       </div>
                       <div className="ranked-item-score">
                         {item.composite_score}%

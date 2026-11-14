@@ -1,8 +1,8 @@
 /* ==========================================================================
-   TERRA-LENS: Planetary Analog Workbench - Main Theme
-   Faithfully preserves the original sidebar + main stage layout,
-   with synchronized split-scope, X-Ray loupe, weighting engine,
-   diagnostic matrix, and campaign brief dossier.
+   TERRA-LENS: Planetary Analog Workbench - Main Stylesheet
+   Faithful to the original layout (sidebar + main discovery stage)
+   with full feature support for SplitScope, X-Ray Loupe, Weighting Engine,
+   Diagnostic Matrix, and Campaign Brief Dossier.
    ========================================================================== */
 
 * {
@@ -11,7 +11,7 @@
 
 body {
   margin: 0;
-  font-family: Inter, Arial, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #090e16;
   color: #e8edf5;
   min-height: 100vh;
@@ -23,7 +23,7 @@ body {
 }
 
 /* ==========================================================================
-   SIDEBAR (Original look & feel preserved)
+   SIDEBAR
    ========================================================================== */
 
 .sidebar {
@@ -42,13 +42,14 @@ body {
   gap: 12px;
   align-items: center;
   color: #76d8c0;
-  margin-bottom: 55px;
+  margin-bottom: 50px;
 }
 
 .brand h2 {
   font-size: 17px;
   letter-spacing: 2px;
   margin: 0;
+  font-weight: 800;
 }
 
 .brand span,
@@ -62,17 +63,17 @@ body {
 }
 
 .nav-label {
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .nav-item {
-  padding: 13px 12px;
+  padding: 12px 14px;
   display: flex;
   gap: 12px;
   align-items: center;
   color: #9baabd;
   font-size: 13px;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
   border-radius: 7px;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -86,6 +87,7 @@ body {
 .nav-item.active {
   background: #19332f;
   color: #76d8c0;
+  font-weight: 600;
 }
 
 .sidebar-bottom {
@@ -98,7 +100,7 @@ body {
 .sidebar-bottom p {
   color: #718198;
   letter-spacing: 0;
-  margin-top: 4px;
+  margin: 4px 0 0;
 }
 
 .status-dot {
@@ -111,7 +113,7 @@ body {
 }
 
 /* ==========================================================================
-   MAIN CONTENT VIEWPORT
+   MAIN CONTENT AREA
    ========================================================================== */
 
 .main {
@@ -152,8 +154,8 @@ body {
 
 /* Intro Banner */
 .intro {
-  margin: 35px 0 25px;
-  padding: 25px 30px;
+  margin: 32px 0 24px;
+  padding: 24px 30px;
   border: 1px solid #263c49;
   border-radius: 10px;
   background: linear-gradient(110deg, #142c32, #111c2b);
@@ -163,7 +165,7 @@ body {
 }
 
 .intro h2 {
-  margin: 0 0 9px;
+  margin: 0 0 8px;
   font-size: 22px;
 }
 
@@ -177,7 +179,7 @@ body {
 
 .intro-icon {
   color: #76d8c0;
-  padding: 15px;
+  padding: 12px;
 }
 
 /* Selection Grid */
@@ -200,7 +202,7 @@ body {
   gap: 10px;
   align-items: center;
   color: #76d8c0;
-  margin-bottom: 23px;
+  margin-bottom: 22px;
 }
 
 label {
@@ -227,7 +229,7 @@ select {
   border-radius: 6px;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
 }
 
 .selection-info strong {
@@ -253,7 +255,7 @@ select {
 
 .compare-button {
   display: flex;
-  gap: 9px;
+  gap: 8px;
   align-items: center;
   padding: 11px 16px;
   border: 0;
@@ -339,6 +341,7 @@ select {
   border-radius: 4px;
   color: #22d3ee;
   font-size: 11px;
+  outline: none;
 }
 
 .zoom-btn-group {
@@ -619,14 +622,13 @@ select {
 }
 
 /* ==========================================================================
-   WORKBENCH EXTENSIONS: MISSION WEIGHTS & DIAGNOSTICS
+   MISSION PRIORITY WEIGHTING ENGINE & DYNAMIC RANKINGS
    ========================================================================== */
 
 .workbench-section {
   margin-top: 45px;
 }
 
-/* Weights Grid */
 .weights-layout-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -636,7 +638,41 @@ select {
 
 .weights-controls-card,
 .ranked-analogs-card {
-  padding: 20px;
+  padding: 22px;
+}
+
+.target-toggle-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.target-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #142232;
+  border: 1px solid #283e54;
+  border-radius: 6px;
+  color: #a9b6c7;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.target-pill:hover {
+  border-color: #76d8c0;
+  color: #ffffff;
+}
+
+.target-pill.active {
+  background: #17483f;
+  border-color: #76d8c0;
+  color: #76d8c0;
 }
 
 .presets-row {
@@ -789,6 +825,23 @@ select {
   color: #8494a9;
 }
 
+.mini-score-bars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.mini-score-bars span {
+  font-size: 9px;
+  font-family: monospace;
+  background: #0b1522;
+  border: 1px solid #20354a;
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #8da4be;
+}
+
 .ranked-item-score {
   padding: 3px 8px;
   border-radius: 4px;
@@ -807,7 +860,10 @@ select {
   margin-left: auto;
 }
 
-/* Diagnostics Grid */
+/* ==========================================================================
+   SCIENTIFIC DIAGNOSTIC MATRIX
+   ========================================================================== */
+
 .diagnostics-layout-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -816,7 +872,7 @@ select {
 }
 
 .chart-panel {
-  padding: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -920,6 +976,17 @@ select {
 .diagnostic-card.tier-mitigation .diag-tag { color: #38bdf8; }
 .diagnostic-card.tier-mitigation h3 { color: #7dd3fc; }
 .diagnostic-card.tier-mitigation p { color: #e0f2fe; }
+
+/* Footer */
+footer {
+  border-top: 1px solid #253345;
+  margin-top: 40px;
+  padding-top: 18px;
+  color: #718198;
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 
 /* ==========================================================================
    CAMPAIGN DOSSIER MODAL & PRINT MEDIA

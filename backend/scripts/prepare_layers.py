@@ -13,7 +13,7 @@ import struct
 import random
 from pathlib import Path
 
-# Paths
+# Define paths
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent.parent
 PUBLIC_DATA = WORKSPACE_ROOT / "frontend" / "public" / "data"
 
@@ -47,9 +47,8 @@ def write_png(filepath, width, height, rgb_pixels):
         chunk.extend(struct.pack(">I", crc))
         return chunk
 
-    # IHDR chunk
-    ihdr_data = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
-    png.extend(make_chunk(b"IHDR", ihdr_data))
+    grid /= total_amp
+    return grid
 
     # Raw scanlines with filter type 0
     raw_data = bytearray()
