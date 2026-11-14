@@ -1,0 +1,97 @@
+{
+  "project": "TERRA-LENS",
+  "version": "0.1",
+  "notice": "Starter structure only. No scientific measurements or similarity scores have been populated.",
+  "sensor_layers": [
+    "optical",
+    "sar",
+    "thermal",
+    "topography"
+  ],
+  "planetary_targets": [
+    {
+      "id": "moon",
+      "body": "Moon",
+      "locations": ["Shackleton Crater", "Connecting Ridge"],
+      "layers": {
+        "optical": {"source": "LROC", "asset": null},
+        "sar": {"source": "LRO Mini-RF", "asset": null},
+        "thermal": {"source": "LRO Diviner", "asset": null},
+        "topography": {"source": "LRO LOLA", "asset": null}
+      }
+    },
+    {
+      "id": "mars",
+      "body": "Mars",
+      "locations": ["Jezero Crater Margin", "Nili Fossae"],
+      "layers": {
+        "optical": {"source": "Mars HiRISE", "asset": null},
+        "sar": {"source": "Radar dataset to be selected", "asset": null},
+        "thermal": {"source": "Mars THEMIS", "asset": null},
+        "topography": {"source": "Mars MOLA", "asset": null}
+      }
+    }
+  ],
+  "earth_analogs": [
+    {
+      "id": "tablelands",
+      "name": "The Tablelands",
+      "region": "Newfoundland, Canada",
+      "coordinates": [-57.73, 49.59],
+      "layers": {
+        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
+        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
+        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
+        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+      }
+    },
+    {
+      "id": "harrat_khaybar",
+      "name": "Harrat Khaybar",
+      "region": "Saudi Arabia",
+      "coordinates": [39.9, 25.7],
+      "layers": {
+        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
+        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
+        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
+        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+      }
+    },
+    {
+      "id": "tolbachik",
+      "name": "Sredinny Range / Tolbachik",
+      "region": "Kamchatka, Russia",
+      "coordinates": [160.33, 55.83],
+      "layers": {
+        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
+        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
+        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
+        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+      }
+    },
+    {
+      "id": "tuktoyaktuk",
+      "name": "Tuktoyaktuk Pingos",
+      "region": "Northwest Territories, Canada",
+      "coordinates": [-133.04, 69.44],
+      "layers": {
+        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
+        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
+        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
+        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+      }
+    },
+    {
+      "id": "lut_desert",
+      "name": "Lut Desert Yardangs",
+      "region": "Iran",
+      "coordinates": [59.0, 29.8],
+      "layers": {
+        "optical": {"source": "ESA Sentinel-2", "asset": null, "metrics": null},
+        "sar": {"source": "CSA RADARSAT or JAXA ALOS PALSAR", "asset": null, "metrics": null},
+        "thermal": {"source": "NASA MODIS Land Surface Temperature", "asset": null, "metrics": null},
+        "topography": {"source": "JAXA AW3D30 DEM", "asset": null, "metrics": null}
+      }
+    }
+  ]
+}

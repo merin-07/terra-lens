@@ -1,0 +1,28 @@
+
+# Frontend dependencies and build files
+frontend/node_modules/
+frontend/dist/
+
+# Python virtual environment
+backend/venv/
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Secret environment files
+.env
+.env.*
+!.env.example
+
+# Raw satellite data
+data/raw/
+TERRA-LENS-DATA/raw/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+__pycache__/
