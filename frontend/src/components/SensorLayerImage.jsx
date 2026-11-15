@@ -5,9 +5,9 @@ const BASE_FALLBACK_IMAGE = "/data/moon/shackleton/optical/shackleton_preview_cr
 
 /**
  * SensorLayerImage renders multi-spectral planetary and terrestrial imagery.
- * If a derived image is not present on disk, it falls back to the preserved base texture
- * with scientific SVG/CSS colormaps (Optical, SAR speckled grayscale, Thermal Inferno LUT, Slope relief).
- * Primes offscreen canvas telemetry cache when image loads.
+ * When real derived raster PNGs are present on disk, they render cleanly with zero distortion.
+ * If an image fails or is missing, it gracefully falls back to the base texture
+ * and activates simulated scientific SVG/CSS colormaps (SAR speckle, Inferno LUT, Slope relief).
  */
 export default function SensorLayerImage({
   src,
@@ -43,8 +43,14 @@ export default function SensorLayerImage({
     if (onLoad) onLoad(e);
   };
 
-  // Determine filter style and overlay colormaps based on active sensor
+  // Determine filter style: only apply heavy colormaps if falling back on error
   const getFilterStyle = () => {
+    if (!isFailed) {
+      // Real scientific PNG raster - render raw and crisp
+      return { filter: "none" };
+    }
+
+    // Fallback colormaps over base optical texture
     switch (layerType) {
       case "sar":
         return {
@@ -77,7 +83,16 @@ export default function SensorLayerImage({
   };
 
   return (
-    <div className={`sensor-image-wrapper ${className}`} style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", ...style }}>
+    <div
+      className={`sensor-image-wrapper ${className}`}
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+        ...style,
+      }}
+    >
       {/* Base Imagery */}
       <img
         src={currentSrc}
@@ -96,8 +111,8 @@ export default function SensorLayerImage({
         }}
       />
 
-      {/* SAR Speckle & Cyan Backscatter Overlay */}
-      {layerType === "sar" && (
+      {/* Fallback SAR Speckle & Cyan Backscatter Overlay */}
+      {isFailed && layerType === "sar" && (
         <>
           <div
             className="sar-speckle-overlay"
@@ -124,8 +139,8 @@ export default function SensorLayerImage({
         </>
       )}
 
-      {/* Thermal Radiometric Inferno/Magma False-Color Overlay */}
-      {layerType === "thermal" && (
+      {/* Fallback Thermal Radiometric Inferno/Magma False-Color Overlay */}
+      {isFailed && layerType === "thermal" && (
         <div
           className="thermal-inferno-lut"
           style={{
@@ -138,8 +153,8 @@ export default function SensorLayerImage({
         />
       )}
 
-      {/* Topographic Slope Relief Gradient Overlay */}
-      {layerType === "slope" && (
+      {/* Fallback Topographic Slope Relief Gradient Overlay */}
+      {isFailed && layerType === "slope" && (
         <div
           className="slope-relief-lut"
           style={{
@@ -154,6 +169,7 @@ export default function SensorLayerImage({
 
       {/* Telemetry Corner Indicator */}
       <div
+        className="sensor-resolution-badge"
         style={{
           position: "absolute",
           top: "8px",
@@ -161,17 +177,18 @@ export default function SensorLayerImage({
           display: "flex",
           alignItems: "center",
           gap: "6px",
-          padding: "3px 7px",
+          padding: "3px 8px",
           borderRadius: "4px",
-          background: "rgba(11, 19, 30, 0.8)",
-          border: "1px solid rgba(118, 216, 192, 0.25)",
-          color: "#76d8c0",
+          background: "rgba(7, 11, 18, 0.85)",
+          border: "1px solid rgba(104, 189, 246, 0.25)",
+          color: "#68bdf6",
           fontSize: "9px",
-          fontFamily: "monospace",
-          letterSpacing: "1px",
+          fontFamily: "'JetBrains Mono', monospace",
+          letterSpacing: "0.8px",
           textTransform: "uppercase",
           pointerEvents: "none",
-          zIndex: 2,
+          zIndex: 4,
+          backdropFilter: "blur(4px)",
         }}
       >
         <span
@@ -186,7 +203,16 @@ export default function SensorLayerImage({
                 ? "#f97316"
                 : layerType === "slope"
                 ? "#a855f7"
-                : "#76d8c0",
+                : "#68bdf6",
+            boxShadow: `0 0 6px ${
+              layerType === "sar"
+                ? "#22d3ee"
+                : layerType === "thermal"
+                ? "#f97316"
+                : layerType === "slope"
+                ? "#a855f7"
+                : "#68bdf6"
+            }`,
           }}
         />
         {layerType.toUpperCase()} · {resolution}
@@ -200,15 +226,17 @@ export default function SensorLayerImage({
             right: "8px",
             padding: "2px 6px",
             borderRadius: "3px",
-            background: "rgba(30, 41, 59, 0.85)",
-            color: "#94a3b8",
+            background: "rgba(20, 26, 38, 0.9)",
+            border: "1px solid rgba(245, 166, 35, 0.4)",
+            color: "#f5a623",
             fontSize: "8px",
-            fontFamily: "monospace",
+            fontFamily: "'JetBrains Mono', monospace",
+            letterSpacing: "0.5px",
             pointerEvents: "none",
-            zIndex: 2,
+            zIndex: 4,
           }}
         >
-          SYNTHETIC SCI-LUT ACTIVE
+          SYNTHETIC SCI-LUT FALLBACK
         </div>
       )}
     </div>
