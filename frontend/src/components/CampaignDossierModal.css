@@ -1,0 +1,965 @@
+/* ==========================================================================
+   TERRA-LENS OFFICIAL CAMPAIGN DOSSIER & CERTIFICATION SUITE
+   Self-contained styles for CampaignDossierModal
+   ========================================================================== */
+
+/* Modal Container & Dialog */
+.dossier-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 13, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: dossierFadeIn 0.2s ease-out;
+}
+
+@keyframes dossierFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.dossier-modal-dialog {
+  background: #090e17;
+  border: 1px solid #1e324d;
+  border-radius: 10px;
+  width: 1080px;
+  max-width: 96vw;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(34, 211, 238, 0.08);
+}
+
+/* Action Controls Bar */
+.dossier-actions-bar {
+  padding: 12px 20px;
+  background: #0b1422;
+  border-bottom: 1px solid #1c2d42;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dossier-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dossier-pill-security {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid #f59e0b;
+  color: #fbbf24;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.dossier-code {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.dossier-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Action Buttons Group */
+.dossier-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dossier-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.dossier-btn-primary {
+  background: #76d8c0;
+  color: #04241d;
+  border-color: #76d8c0;
+}
+
+.dossier-btn-primary:hover {
+  background: #9ff2dc;
+  border-color: #9ff2dc;
+  box-shadow: 0 0 12px rgba(118, 216, 192, 0.4);
+}
+
+.dossier-btn-secondary {
+  background: #132235;
+  color: #e2e8f0;
+  border-color: #233954;
+}
+
+.dossier-btn-secondary:hover {
+  background: #1b2f48;
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+.dossier-btn-accent {
+  background: rgba(34, 211, 238, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.dossier-btn-accent:hover {
+  background: rgba(34, 211, 238, 0.22);
+  border-color: #38bdf8;
+  color: #bae6fd;
+}
+
+.dossier-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #1e324d;
+  border-radius: 5px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dossier-close-btn:hover {
+  color: #ffffff;
+  border-color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Printable Document Body */
+.dossier-document {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #090f1a;
+  color: #f1f5f9;
+}
+
+/* Header Section */
+.dossier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #1c2e44;
+  padding-bottom: 20px;
+  gap: 20px;
+}
+
+.header-meta {
+  flex: 1;
+}
+
+.org-title {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #76d8c0;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.dossier-main-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 6px 0 10px 0;
+  letter-spacing: -0.3px;
+}
+
+.header-submeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+}
+
+.header-submeta strong {
+  color: #ffffff;
+}
+
+/* Dynamic Mission Patch */
+.mission-patch-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.mission-patch-container {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.25));
+  transition: transform 0.2s ease;
+}
+
+.mission-patch-container:hover {
+  transform: scale(1.03);
+}
+
+.mission-patch-hash {
+  font-size: 8px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #76d8c0;
+  background: #0d1a29;
+  border: 1px solid #1e334d;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+/* Composite Fidelity Assessment Banner */
+.dossier-composite-banner {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  background: #0f1927;
+  border: 1px solid #233954;
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+
+.composite-badge-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #1c2e44;
+  padding-right: 20px;
+}
+
+.composite-label {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.composite-score-huge {
+  font-size: 44px;
+  font-weight: 900;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #76d8c0;
+  line-height: 1;
+  margin: 6px 0;
+  text-shadow: 0 0 20px rgba(118, 216, 192, 0.4);
+}
+
+.composite-rating {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #10b981;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.composite-weights-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.weights-label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #38bdf8;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.weights-bar-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weight-pill {
+  padding: 4px 10px;
+  background: #142337;
+  border: 1px solid #20344d;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+}
+
+.weight-pill strong {
+  color: #ffffff;
+}
+
+.weights-desc {
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Section Titles */
+.dossier-section-title {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #76d8c0;
+  letter-spacing: 1px;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 4-Sensor Multi-Spectral Strip */
+.dossier-sensor-strip-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sensor-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.sensor-strip-card {
+  background: #0c1624;
+  border: 1px solid #1c2e44;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sensor-strip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.strip-sensor-badge {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.strip-sensor-badge.optical { color: #76d8c0; background: rgba(118, 216, 192, 0.15); }
+.strip-sensor-badge.sar { color: #22d3ee; background: rgba(34, 211, 238, 0.15); }
+.strip-sensor-badge.thermal { color: #f97316; background: rgba(249, 115, 22, 0.15); }
+.strip-sensor-badge.slope { color: #a855f7; background: rgba(168, 85, 247, 0.15); }
+
+.sensor-strip-header small {
+  font-size: 8px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+}
+
+.sensor-strip-previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.strip-preview-pane {
+  position: relative;
+  height: 95px;
+  background: #040810;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #18283a;
+}
+
+.strip-pane-tag {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  padding: 1px 5px;
+  background: rgba(4, 8, 16, 0.85);
+  font-size: 8px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #cbd5e1;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sensor-strip-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+}
+
+.sensor-strip-sources strong {
+  color: #cbd5e1;
+}
+
+/* Two-Column Grid: Radar + Stats */
+.dossier-grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.dossier-box {
+  background: #0c1624;
+  border: 1px solid #1c2e44;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.dossier-stats-table th {
+  text-align: left;
+  padding: 6px 8px;
+  color: #94a3b8;
+  border-bottom: 1px solid #1c2e44;
+  font-size: 10px;
+}
+
+.dossier-stats-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e2edf5;
+}
+
+.bold-cell {
+  font-weight: 700;
+  color: #76d8c0 !important;
+}
+
+.unit-cell {
+  color: #94a3b8 !important;
+  font-size: 10px;
+}
+
+.site-geology-note {
+  margin-top: 14px;
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.5;
+  padding: 10px 12px;
+  background: #111e30;
+  border-radius: 5px;
+  border-left: 3px solid #76d8c0;
+}
+
+.site-geology-note strong {
+  color: #e2edf5;
+}
+
+/* 3-Tier Scientific Diagnostic Assessment Table */
+.dossier-diagnostics-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-tier-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #1c2e44;
+}
+
+.tier-col-label {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.tier-col-body {
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 1.55;
+  background: #0c1624;
+}
+
+.match-row .tier-col-label {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+}
+.match-row .tier-col-body { color: #ecfdf5; }
+
+.breakdown-row .tier-col-label {
+  background: rgba(239, 68, 68, 0.16);
+  color: #f87171;
+}
+.breakdown-row .tier-col-body { color: #fef2f2; }
+
+.mitigation-row .tier-col-label {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+}
+.mitigation-row .tier-col-body { color: #f0f9ff; }
+
+/* TRL Field Certification Matrix */
+.trl-matrix-section {
+  display: flex;
+  flex-direction: column;
+  background: #0c1624;
+  border: 1px solid #1c2e44;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 14px;
+}
+
+.trl-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.trl-card {
+  background: #111e30;
+  border: 1px solid #20354d;
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trl-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #76d8c0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.trl-card-val {
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.trl-card-desc {
+  font-size: 10px;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Signoff Section */
+.dossier-signoff {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed #20344d;
+}
+
+.signoff-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signoff-role {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.signoff-line {
+  font-size: 11px;
+  color: #cbd5e1;
+  border-bottom: 1px solid #20344d;
+  padding-bottom: 6px;
+}
+
+.signoff-stamp {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: #10b981;
+  font-weight: 700;
+  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 5px 8px;
+  border-radius: 4px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   ROBUST MULTI-PAGE PRINT MEDIA STYLES
+   ========================================================================== */
+
+@media print {
+  /* Page Geometry */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+
+  /* Reset body and background for printing */
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide entire application shell and dossier actions */
+  .sidebar,
+  .topbar,
+  .intro,
+  .selection-grid,
+  .comparison,
+  .workbench-section,
+  footer,
+  .dossier-actions-bar,
+  .dossier-close-btn,
+  .dossier-btn-group,
+  .dossier-modal-overlay::before {
+    display: none !important;
+  }
+
+  /* Flatten modal overlays */
+  .dossier-modal-overlay {
+    position: static !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .dossier-modal-dialog {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+
+  .dossier-document {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    gap: 14pt !important;
+  }
+
+  /* Header */
+  .dossier-header {
+    border-bottom: 2pt solid #0f172a !important;
+    padding-bottom: 10pt !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .org-title {
+    color: #047857 !important;
+    font-size: 8pt !important;
+  }
+
+  .dossier-main-title {
+    color: #0f172a !important;
+    font-size: 16pt !important;
+    margin: 4pt 0 6pt 0 !important;
+  }
+
+  .header-submeta {
+    color: #475569 !important;
+    font-size: 8.5pt !important;
+  }
+
+  .header-submeta strong {
+    color: #0f172a !important;
+  }
+
+  .mission-patch-hash {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+
+  /* Composite Banner */
+  .dossier-composite-banner {
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    padding: 10pt 14pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .composite-badge-col {
+    border-right: 1pt solid #cbd5e1 !important;
+  }
+
+  .composite-label,
+  .weights-label {
+    color: #475569 !important;
+  }
+
+  .composite-score-huge {
+    color: #047857 !important;
+    font-size: 32pt !important;
+    text-shadow: none !important;
+  }
+
+  .composite-rating {
+    color: #065f46 !important;
+  }
+
+  .weight-pill {
+    background: #e2e8f0 !important;
+    border-color: #cbd5e1 !important;
+    color: #1e293b !important;
+  }
+
+  .weight-pill strong {
+    color: #0f172a !important;
+  }
+
+  .weights-desc {
+    color: #334155 !important;
+    font-size: 8.5pt !important;
+  }
+
+  /* Section Title */
+  .dossier-section-title {
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    margin-bottom: 6pt !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* 4-Sensor Strip */
+  .dossier-sensor-strip-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .sensor-strip-card {
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    padding: 6pt !important;
+  }
+
+  .sensor-strip-header small {
+    color: #475569 !important;
+  }
+
+  .strip-preview-pane {
+    height: 70pt !important;
+    background: #e2e8f0 !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  .sensor-strip-sources {
+    color: #475569 !important;
+    font-size: 7.5pt !important;
+  }
+
+  .sensor-strip-sources strong {
+    color: #0f172a !important;
+  }
+
+  /* Two-Col Grid */
+  .dossier-grid-two-col {
+    gap: 12pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .dossier-box {
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    padding: 10pt !important;
+  }
+
+  .dossier-stats-table th {
+    color: #475569 !important;
+    border-bottom: 1pt solid #cbd5e1 !important;
+    font-size: 8pt !important;
+  }
+
+  .dossier-stats-table td {
+    color: #0f172a !important;
+    border-bottom: 1pt solid #e2e8f0 !important;
+    font-size: 8.5pt !important;
+  }
+
+  .bold-cell {
+    color: #047857 !important;
+  }
+
+  .unit-cell {
+    color: #64748b !important;
+  }
+
+  .site-geology-note {
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    border-left: 2pt solid #047857 !important;
+    font-size: 8.5pt !important;
+  }
+
+  .site-geology-note strong {
+    color: #0f172a !important;
+  }
+
+  /* 3-Tier Diagnostic Assessment */
+  .dossier-diagnostics-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .tier-row {
+    border: 1pt solid #cbd5e1 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .match-row .tier-col-label {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+  }
+  .match-row .tier-col-body {
+    background: #f0fdf4 !important;
+    color: #064e3b !important;
+  }
+
+  .breakdown-row .tier-col-label {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+  }
+  .breakdown-row .tier-col-body {
+    background: #fef2f2 !important;
+    color: #7f1d1d !important;
+  }
+
+  .mitigation-row .tier-col-label {
+    background: #e0f2fe !important;
+    color: #0369a1 !important;
+  }
+  .mitigation-row .tier-col-body {
+    background: #f0f9ff !important;
+    color: #0c4a6e !important;
+  }
+
+  /* TRL Matrix */
+  .trl-matrix-section {
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    padding: 10pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .trl-card {
+    background: #ffffff !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  .trl-card-header {
+    color: #047857 !important;
+  }
+
+  .trl-card-val {
+    color: #0f172a !important;
+  }
+
+  .trl-card-desc {
+    color: #475569 !important;
+  }
+
+  /* Signoff */
+  .dossier-signoff {
+    border-top: 1pt dashed #94a3b8 !important;
+    padding-top: 12pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .signoff-role {
+    color: #64748b !important;
+  }
+
+  .signoff-line {
+    color: #0f172a !important;
+    border-bottom: 1pt solid #cbd5e1 !important;
+  }
+
+  .signoff-stamp {
+    color: #065f46 !important;
+    border: 1pt solid #059669 !important;
+    background: #ecfdf5 !important;
+  }
+}
