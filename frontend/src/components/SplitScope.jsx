@@ -1,18 +1,14 @@
-import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { TransformWrapper, TransformComponent } from "./ZoomPanPinch";
 import {
-  Layers3,
-  ZoomIn,
-  ZoomOut,
-  RotateCcw,
-  Crosshair,
-  Grid,
-  ChevronDown,
-  ChevronUp,
-  Activity,
-  Sliders,
-  Sparkles,
-} from "lucide-react";
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+import { TransformWrapper, TransformComponent } from "./ZoomPanPinch";
+import { Activity, X } from "lucide-react";
 import SensorLayerImage from "./SensorLayerImage";
 import {
   samplePixelTelemetry,
@@ -27,15 +23,13 @@ const SENSOR_VISORS = [
   { id: "optical", label: "Optical" },
   { id: "sar", label: "SAR Radar" },
   { id: "thermal", label: "Thermal" },
-  { id: "slope", label: "Topography / Slope" },
+  { id: "slope", label: "Elevation" },
 ];
-
-const LOUPE_RADII = [90, 140, 200];
 
 /**
  * 8-Bin SVG Sparkline Mini-Histogram
  */
-function SparklineHistogram({ histogram, color = "#22d3ee", label = "Target" }) {
+function SparklineHistogram({ histogram, color = "#38bdf8", label = "Target" }) {
   const safeHist =
     Array.isArray(histogram) && histogram.length === 8
       ? histogram
@@ -57,7 +51,7 @@ function SparklineHistogram({ histogram, color = "#22d3ee", label = "Target" }) 
         <defs>
           <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={color} stopOpacity="0.95" />
-            <stop offset="100%" stopColor={color} stopOpacity="0.3" />
+            <stop offset="100%" stopColor={color} stopOpacity="0.25" />
           </linearGradient>
         </defs>
         {safeHist.map((val, idx) => {
@@ -76,7 +70,7 @@ function SparklineHistogram({ histogram, color = "#22d3ee", label = "Target" }) 
               stroke={color}
               strokeWidth={0.5}
             >
-              <title>{`Bin ${idx + 1} (${(idx * 0.125).toFixed(2)}–${((idx + 1) * 0.125).toFixed(2)}): ${(val * 100).toFixed(1)}%`}</title>
+              <title>{`Bin ${idx + 1}: ${(val * 100).toFixed(1)}%`}</title>
             </rect>
           );
         })}
@@ -96,33 +90,48 @@ function classifyMicroRoughness(sigma) {
   return "Rugged Scarp / Impact Ejecta";
 }
 
-export default function SplitScope({
-  target,
-  analog,
-  activeSensor = "optical",
-  onSensorChange,
-  diagnostics,
-}) {
-  const [loupeActive, setLoupeActive] = useState(false);
-  const [chosenLoupeSensor, setChosenLoupeSensor] = useState("sar");
-  const [loupeRadius, setLoupeRadius] = useState(140); // 90px / 140px / 200px
-  const [showTacticalGrid, setShowTacticalGrid] = useState(false);
-  const [isHudCollapsed, setIsHudCollapsed] = useState(false);
-
+const SplitScope = forwardRef(function SplitScope(
+  {
+    target,
+    analog,
+    activeSensor = "optical",
+    loupeActive = false,
+    chosenLoupeSensor = "sar",
+    loupeRadius = 140,
+    showTransect = false,
+    onCloseTransect,
+    onTelemetryChange,
+  },
+  ref
+) {
   // Cursor tracking { pctX, pctY, pxX, pxY, width, height }
   const [cursorPos, setCursorPos] = useState(null);
 
-  // Persistent last sampled coordinates so HUD never collapses to blank when mouse leaves
+  // Persistent last sampled coordinates so readouts never collapse to blank
   const [lastSampledPos, setLastSampledPos] = useState({
     pctX: 50.0,
     pctY: 50.0,
-    pxX: 200,
-    pxY: 145,
-    width: 400,
-    height: 290,
+    pxX: 400,
+    pxY: 300,
+    width: 800,
+    height: 600,
   });
 
-  // Revision counter to re-render when offscreen canvas finishes rasterizing asynchronously
+  // Sensor Calibration Laser Sweep trigger
+  const [isScanning, setIsScanning] = useState(false);
+  useEffect(() => {
+    let timer;
+    const animFrame = requestAnimationFrame(() => {
+      setIsScanning(true);
+      timer = setTimeout(() => setIsScanning(false), 420);
+    });
+    return () => {
+      cancelAnimationFrame(animFrame);
+      if (timer) clearTimeout(timer);
+    };
+  }, [target?.id, analog?.id, activeSensor]);
+
+  // Revision counter for asynchronous offscreen canvas rasterization
   const [, setCanvasRevision] = useState(0);
 
   const leftTransformRef = useRef(null);
@@ -135,7 +144,7 @@ export default function SplitScope({
   const targetLayer = target?.layers?.[activeSensor];
   const analogLayer = analog?.layers?.[activeSensor];
 
-  // Compute effective loupe sensor without synchronous effect setState
+  // Effective loupe sensor (reveals a different layer than active)
   const effectiveLoupeSensor =
     chosenLoupeSensor === activeSensor
       ? SENSOR_VISORS.find((v) => v.id !== activeSensor)?.id || "sar"
@@ -186,18 +195,29 @@ export default function SplitScope({
     }, 15);
   }, []);
 
-  const handleResetZoom = () => {
-    if (leftTransformRef.current) leftTransformRef.current.resetTransform(200);
-    if (rightTransformRef.current) rightTransformRef.current.resetTransform(200);
-  };
+  const handleResetZoom = useCallback(() => {
+    if (leftTransformRef.current) leftTransformRef.current.resetTransform(180);
+    if (rightTransformRef.current) rightTransformRef.current.resetTransform(180);
+  }, []);
 
-  const handleZoomIn = () => {
+  const handleZoomIn = useCallback(() => {
     if (leftTransformRef.current) leftTransformRef.current.zoomIn(0.35, 150);
-  };
+  }, []);
 
-  const handleZoomOut = () => {
+  const handleZoomOut = useCallback(() => {
     if (leftTransformRef.current) leftTransformRef.current.zoomOut(0.35, 150);
-  };
+  }, []);
+
+  // Imperative handle for parent dock actions
+  useImperativeHandle(
+    ref,
+    () => ({
+      zoomIn: handleZoomIn,
+      zoomOut: handleZoomOut,
+      resetZoom: handleResetZoom,
+    }),
+    [handleZoomIn, handleZoomOut, handleResetZoom]
+  );
 
   // Track mouse coordinates across either viewport
   const handleMouseMove = (e, panel) => {
@@ -230,15 +250,14 @@ export default function SplitScope({
   const normX = activeCoord.pctX / 100;
   const normY = activeCoord.pctY / 100;
 
-  // Real-Pixel Telemetry Sampling: Target & Earth Analog (Primary Visor)
+  // Real-Pixel Telemetry Sampling: Target & Earth Analog
   const targetTelemetry = useMemo(() => {
     return samplePixelTelemetry(
       targetLayer?.path,
       normX,
       normY,
       activeSensor,
-      "target",
-      target?.body || "Moon"
+      target?.body?.toLowerCase() || "moon"
     );
   }, [targetLayer?.path, normX, normY, activeSensor, target?.body]);
 
@@ -248,12 +267,11 @@ export default function SplitScope({
       normX,
       normY,
       activeSensor,
-      "analog",
-      "Earth"
+      "earth"
     );
   }, [analogLayer?.path, normX, normY, activeSensor]);
 
-  // Secondary Visor Sampling for X-Ray Loupe when active
+  // Secondary X-Ray Loupe Telemetry
   const targetLoupeTelemetry = useMemo(() => {
     if (!loupeActive) return null;
     return samplePixelTelemetry(
@@ -261,8 +279,7 @@ export default function SplitScope({
       normX,
       normY,
       effectiveLoupeSensor,
-      "target",
-      target?.body || "Moon"
+      target?.body?.toLowerCase() || "moon"
     );
   }, [loupeActive, targetLoupeLayer?.path, normX, normY, effectiveLoupeSensor, target?.body]);
 
@@ -273,17 +290,20 @@ export default function SplitScope({
       normX,
       normY,
       effectiveLoupeSensor,
-      "analog",
-      "Earth"
+      "earth"
     );
   }, [loupeActive, analogLoupeLayer?.path, normX, normY, effectiveLoupeSensor]);
 
-  // Instantaneous Target-vs-Analog Delta Differential Badge
+  // Instantaneous Differential Metrics
   const differentialBadge = useMemo(() => {
-    return computeDifferentialBadge(targetTelemetry, analogTelemetry, activeSensor);
-  }, [targetTelemetry, analogTelemetry, activeSensor]);
+    return computeDifferentialBadge(
+      targetTelemetry.physicalValue,
+      analogTelemetry.physicalValue,
+      activeSensor
+    );
+  }, [targetTelemetry.physicalValue, analogTelemetry.physicalValue, activeSensor]);
 
-  // Real-time Local 9x9 Patch Correlation
+  // 9x9 Neighborhood Cross-Correlation
   const patchCorrelation = useMemo(() => {
     return calculatePatchCorrelation(
       targetTelemetry.patchLuminances,
@@ -291,662 +311,371 @@ export default function SplitScope({
     );
   }, [targetTelemetry.patchLuminances, analogTelemetry.patchLuminances]);
 
-  // Agency Pairing Banner string
-  const getAgencyBanner = () => {
-    const isMoon = target?.body === "Moon";
-    if (activeSensor === "optical") {
-      return isMoon
-        ? "NASA LROC NAC (Moon) ⟷ ESA Sentinel-2 MSI (Earth)"
-        : "NASA MRO HiRISE (Mars) ⟷ ESA Sentinel-2 MSI (Earth)";
+  // Notify parent of updated telemetry for Layer 2 editorial headers
+  useEffect(() => {
+    if (onTelemetryChange) {
+      onTelemetryChange({
+        targetTelemetry,
+        analogTelemetry,
+        differentialBadge,
+        patchCorrelation,
+      });
     }
-    if (activeSensor === "sar") {
-      return isMoon
-        ? "NASA LRO Mini-RF (Moon) ⟷ CSA RADARSAT-2 / JAXA ALOS-2 (Earth)"
-        : "ASI / NASA SHARAD (Mars) ⟷ CSA RADARSAT-2 / JAXA ALOS-2 (Earth)";
-    }
-    if (activeSensor === "thermal") {
-      return isMoon
-        ? "NASA LRO Diviner (Moon) ⟷ NASA ECOSTRESS / MODIS (Earth)"
-        : "NASA Mars Odyssey THEMIS (Mars) ⟷ NASA ECOSTRESS / MODIS (Earth)";
-    }
-    return isMoon
-      ? "NASA LRO LOLA DEM (Moon) ⟷ ESA Copernicus GLO-30 DEM (Earth)"
-      : "ESA / NASA MOLA-HRSC (Mars) ⟷ ESA Copernicus GLO-30 DEM (Earth)";
-  };
-
-  const isRealPixelActive = targetTelemetry.isRealPixel && analogTelemetry.isRealPixel;
+  }, [targetTelemetry, analogTelemetry, differentialBadge, patchCorrelation, onTelemetryChange]);
 
   return (
-    <div className="comparison-content">
-      {/* Sensor Visor Toolbar */}
-      <div className="sensor-toolbar">
-        <div className="sensor-toolbar-top">
-          <div className="sensor-heading">
-            <Layers3 size={18} />
-            <span>SENSOR VISOR</span>
-          </div>
+    <div className="split-scope-viewport-root">
+      {/* ====================================================================
+          LEFT WORLD: PLANETARY TARGET (50vw × 100vh)
+          ==================================================================== */}
+      <div
+        className="split-scope-pane left-pane"
+        ref={leftContainerRef}
+        onMouseMove={(e) => handleMouseMove(e, "left")}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Optical Corner Fiducial Brackets */}
+        <div className="viewport-fiducial tl">┌</div>
+        <div className="viewport-fiducial tr">┐</div>
+        <div className="viewport-fiducial bl">└</div>
+        <div className="viewport-fiducial br">┘</div>
 
-          <div className="scope-utility-buttons">
-            <button
-              className={`loupe-toggle-pill ${loupeActive ? "active" : ""}`}
-              onClick={() => setLoupeActive(!loupeActive)}
-              title="Toggle circular X-Ray magnifying lens"
-            >
-              <Crosshair size={14} />
-              <span>X-RAY LOUPE [{loupeActive ? "ON" : "OFF"}]</span>
-            </button>
+        {/* 420ms Laser Calibration Sweep */}
+        {isScanning && <div className="laser-calibration-scanline" />}
 
-            {loupeActive && (
-              <div className="loupe-select-wrap">
-                <span>REVEALS:</span>
-                <select
-                  value={effectiveLoupeSensor}
-                  onChange={(e) => setChosenLoupeSensor(e.target.value)}
-                  className="loupe-select-input"
-                >
-                  {SENSOR_VISORS.filter((v) => v.id !== activeSensor).map((v) => (
-                    <option key={v.id} value={v.id}>
-                      {v.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            <div className="zoom-btn-group">
-              <button onClick={handleZoomIn} title="Zoom In" className="scope-icon-btn">
-                <ZoomIn size={14} />
-              </button>
-              <button onClick={handleZoomOut} title="Zoom Out" className="scope-icon-btn">
-                <ZoomOut size={14} />
-              </button>
-              <button onClick={handleResetZoom} title="Reset View" className="scope-icon-btn">
-                <RotateCcw size={14} />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="sensor-buttons">
-          {SENSOR_VISORS.map((visor) => (
-            <button
-              key={visor.id}
-              className={activeSensor === visor.id ? "sensor-button active" : "sensor-button"}
-              onClick={() => onSensorChange(visor.id)}
-            >
-              {visor.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="active-pairing-box">
-          <span>ACTIVE PAIRING:</span>
-          <strong>{getAgencyBanner()}</strong>
-        </div>
-      </div>
-
-      {/* Layer Info Cards */}
-      <div className="layer-info">
-        <div>
-          <span>PLANETARY DATA SOURCE</span>
-          <strong>{targetLayer?.agency || targetLayer?.name || "NASA LROC"}</strong>
-        </div>
-
-        <div>
-          <span>EARTH DATA SOURCE</span>
-          <strong>{analogLayer?.agency || analogLayer?.name || "ESA Sentinel-2"}</strong>
-        </div>
-
-        <div>
-          <span>LAYER STATUS & SCALE</span>
-          <strong className="scale-locked-text">
-            ● 10 km × 10 km SCALE LOCKED
-          </strong>
-        </div>
-      </div>
-
-      {/* Dual Synchronized Map Grid */}
-      <div className="map-grid">
-        {/* Left Map Panel: Planetary Target */}
-        <div className="map-panel">
-          <div className="map-label">
-            <div className="map-label-header">
-              <span>PLANETARY TARGET</span>
-              <small>{target?.coordinates}</small>
-            </div>
-            <strong>{target?.name}</strong>
-          </div>
-
-          <div
-            className="viewport-container"
-            ref={leftContainerRef}
-            onMouseMove={(e) => handleMouseMove(e, "left")}
-            onMouseLeave={handleMouseLeave}
+        <TransformWrapper
+          ref={leftTransformRef}
+          initialScale={1}
+          minScale={0.8}
+          maxScale={8}
+          onTransformed={(r, state) => syncTransform("left", state)}
+        >
+          <TransformComponent
+            wrapperStyle={{
+              width: "100%",
+              height: "100%",
+              position: "relative",
+              overflow: "hidden",
+            }}
+            contentStyle={{ width: "100%", height: "100%" }}
           >
-            <TransformWrapper
-              ref={leftTransformRef}
-              initialScale={1}
-              minScale={0.8}
-              maxScale={8}
-              onTransformed={(ref, state) => syncTransform("left", state)}
+            <SensorLayerImage
+              src={targetLayer?.path}
+              layerType={activeSensor}
+              alt={`${target?.name} - ${activeSensor}`}
+              body={target?.body?.toLowerCase()}
+              resolution={targetLayer?.resolution}
+              className={isScanning ? "focus-pull-active" : ""}
+            />
+          </TransformComponent>
+        </TransformWrapper>
+
+        {/* Circular X-Ray Magnifying Loupe Overlay */}
+        {loupeActive && cursorPos && (
+          <div
+            className="xray-loupe-circle"
+            style={{
+              left: `${cursorPos.pxX}px`,
+              top: `${cursorPos.pxY}px`,
+              width: `${loupeRadius * 2}px`,
+              height: `${loupeRadius * 2}px`,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <div
+              className="loupe-content-clipper"
+              style={{ clipPath: `circle(${loupeRadius}px at 50% 50%)` }}
             >
-              <TransformComponent
-                wrapperStyle={{ width: "100%", height: "290px", overflow: "hidden", borderRadius: "6px" }}
-                contentStyle={{ width: "100%", height: "290px" }}
+              <div
+                className="loupe-inner-image"
+                style={{
+                  width: `${cursorPos.width}px`,
+                  height: `${cursorPos.height}px`,
+                  transform: `translate(-${cursorPos.pxX - loupeRadius}px, -${cursorPos.pxY - loupeRadius}px)`,
+                }}
               >
                 <SensorLayerImage
-                  src={targetLayer?.path}
-                  layerType={activeSensor}
-                  alt={`${target?.name} - ${activeSensor}`}
+                  src={targetLoupeLayer?.path}
+                  layerType={effectiveLoupeSensor}
+                  alt={`${target?.name} - Loupe`}
                   body={target?.body?.toLowerCase()}
-                  resolution={targetLayer?.resolution}
+                  resolution={targetLoupeLayer?.resolution}
                 />
-              </TransformComponent>
-            </TransformWrapper>
-
-            {/* High-Contrast Tactical Grid Overlay */}
-            {showTacticalGrid && (
-              <div className="tactical-grid-overlay">
-                <div className="tactical-grid-axis-x" />
-                <div className="tactical-grid-axis-y" />
-                <div className="tactical-grid-quadrant nw">TGT-NW</div>
-                <div className="tactical-grid-quadrant ne">TGT-NE</div>
-                <div className="tactical-grid-quadrant sw">TGT-SW</div>
-                <div className="tactical-grid-quadrant se">TGT-SE</div>
-                <div className="tactical-grid-ticks">
-                  <span>LAT: {target?.coordinates || "0.0°"}</span>
-                  <span>10×10 km QUAD</span>
-                </div>
               </div>
-            )}
-
-            {/* X-Ray Loupe Overlay (Target) */}
-            {loupeActive && cursorPos && (
-              <div
-                className="xray-loupe-circle"
-                style={{
-                  left: `${cursorPos.pxX}px`,
-                  top: `${cursorPos.pxY}px`,
-                  width: `${loupeRadius * 2}px`,
-                  height: `${loupeRadius * 2}px`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                <div
-                  className="loupe-content-clipper"
-                  style={{
-                    clipPath: `circle(${loupeRadius}px at 50% 50%)`,
-                  }}
-                >
-                  <div
-                    className="loupe-inner-image"
-                    style={{
-                      width: `${cursorPos.width}px`,
-                      height: `${cursorPos.height}px`,
-                      transform: `translate(-${cursorPos.pxX - loupeRadius}px, -${cursorPos.pxY - loupeRadius}px)`,
-                    }}
-                  >
-                    <SensorLayerImage
-                      src={targetLoupeLayer?.path}
-                      layerType={effectiveLoupeSensor}
-                      alt={`${target?.name} - Loupe`}
-                      body={target?.body?.toLowerCase()}
-                      resolution={targetLoupeLayer?.resolution}
-                    />
-                  </div>
-                </div>
-                <div className="loupe-ring" />
-                <div className="loupe-reticle-cross" />
-                <div className="loupe-tag">
-                  {effectiveLoupeSensor.toUpperCase()} X-RAY
-                </div>
-                {targetLoupeTelemetry && (
-                  <div className="loupe-telemetry-badge">
-                    {targetLoupeTelemetry.physicalValue?.shortFormatted}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Enhanced Crosshair Marker with Real-Pixel Telemetry */}
-            {cursorPos && !loupeActive && (
-              <div
-                className="reticle-marker"
-                style={{
-                  left: `${cursorPos.pctX}%`,
-                  top: `${cursorPos.pctY}%`,
-                }}
-              >
-                <div className="crosshair-v" />
-                <div className="crosshair-h" />
-                <div className="reticle-box" />
-                <div className="reticle-telemetry-enhanced">
-                  <div className="reticle-row-primary">
-                    <span
-                      className="pixel-color-dot"
-                      style={{ backgroundColor: targetTelemetry.rgbString }}
-                      title={`Sampled RGB: ${targetTelemetry.rgbString}`}
-                    />
-                    <span className="reticle-sensor-val">
-                      {targetTelemetry.physicalValue.formatted}
-                    </span>
-                  </div>
-                  <div className="reticle-row-secondary">
-                    <span>L: {targetTelemetry.luminance}</span>
-                    <span className={`reticle-diff-tag ${differentialBadge.statusClass}`}>
-                      {differentialBadge.status} ({differentialBadge.matchPercent}%)
-                    </span>
-                    <span className="sampling-type-indicator">
-                      {targetTelemetry.isRealPixel ? "● REAL" : "○ SIM"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right Map Panel: Earth Analog */}
-        <div className="map-panel">
-          <div className="map-label">
-            <div className="map-label-header">
-              <span>EARTH ANALOG</span>
-              <small>{analog?.coordinates}</small>
             </div>
-            <strong>{analog?.name} ({analog?.region || analog?.country})</strong>
+            <div className="loupe-ring" />
+            <div className="loupe-reticle-cross" />
+            <svg className="loupe-gyro-bezel" viewBox="0 0 100 100">
+              <circle
+                cx="50"
+                cy="50"
+                r="48"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.45)"
+                strokeWidth="0.8"
+                strokeDasharray="1.5 3"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="44"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.2)"
+                strokeWidth="0.5"
+              />
+              <line x1="50" y1="2" x2="50" y2="7" stroke="#38bdf8" strokeWidth="1.2" />
+              <line x1="50" y1="93" x2="50" y2="98" stroke="#38bdf8" strokeWidth="1.2" />
+              <line x1="2" y1="50" x2="7" y2="50" stroke="#38bdf8" strokeWidth="1.2" />
+              <line x1="93" y1="50" x2="98" y2="50" stroke="#38bdf8" strokeWidth="1.2" />
+            </svg>
+            <div className="loupe-rim-pill">
+              <span>{effectiveLoupeSensor.toUpperCase()} X-RAY</span>
+              {targetLoupeTelemetry && (
+                <strong>{targetLoupeTelemetry.physicalValue?.shortFormatted}</strong>
+              )}
+            </div>
           </div>
+        )}
 
+        {/* Minimalist Precision Reticle */}
+        {cursorPos && !loupeActive && (
           <div
-            className="viewport-container"
-            ref={rightContainerRef}
-            onMouseMove={(e) => handleMouseMove(e, "right")}
-            onMouseLeave={handleMouseLeave}
+            className="spatial-reticle"
+            style={{
+              left: `${cursorPos.pctX}%`,
+              top: `${cursorPos.pctY}%`,
+            }}
           >
-            <TransformWrapper
-              ref={rightTransformRef}
-              initialScale={1}
-              minScale={0.8}
-              maxScale={8}
-              onTransformed={(ref, state) => syncTransform("right", state)}
-            >
-              <TransformComponent
-                wrapperStyle={{ width: "100%", height: "290px", overflow: "hidden", borderRadius: "6px" }}
-                contentStyle={{ width: "100%", height: "290px" }}
-              >
-                <SensorLayerImage
-                  src={analogLayer?.path}
-                  layerType={activeSensor}
-                  alt={`${analog?.name} - ${activeSensor}`}
-                  body="earth"
-                  resolution={analogLayer?.resolution}
-                />
-              </TransformComponent>
-            </TransformWrapper>
-
-            {/* High-Contrast Tactical Grid Overlay */}
-            {showTacticalGrid && (
-              <div className="tactical-grid-overlay">
-                <div className="tactical-grid-axis-x" />
-                <div className="tactical-grid-axis-y" />
-                <div className="tactical-grid-quadrant nw">ANA-NW</div>
-                <div className="tactical-grid-quadrant ne">ANA-NE</div>
-                <div className="tactical-grid-quadrant sw">ANA-SW</div>
-                <div className="tactical-grid-quadrant se">ANA-SE</div>
-                <div className="tactical-grid-ticks">
-                  <span>LAT: {analog?.coordinates || "0.0°"}</span>
-                  <span>10×10 km QUAD</span>
-                </div>
-              </div>
-            )}
-
-            {/* X-Ray Loupe Overlay (Analog) */}
-            {loupeActive && cursorPos && (
-              <div
-                className="xray-loupe-circle"
-                style={{
-                  left: `${cursorPos.pxX}px`,
-                  top: `${cursorPos.pxY}px`,
-                  width: `${loupeRadius * 2}px`,
-                  height: `${loupeRadius * 2}px`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                <div
-                  className="loupe-content-clipper"
-                  style={{
-                    clipPath: `circle(${loupeRadius}px at 50% 50%)`,
-                  }}
-                >
-                  <div
-                    className="loupe-inner-image"
-                    style={{
-                      width: `${cursorPos.width}px`,
-                      height: `${cursorPos.height}px`,
-                      transform: `translate(-${cursorPos.pxX - loupeRadius}px, -${cursorPos.pxY - loupeRadius}px)`,
-                    }}
-                  >
-                    <SensorLayerImage
-                      src={analogLoupeLayer?.path}
-                      layerType={effectiveLoupeSensor}
-                      alt={`${analog?.name} - Loupe`}
-                      body="earth"
-                      resolution={analogLoupeLayer?.resolution}
-                    />
-                  </div>
-                </div>
-                <div className="loupe-ring" />
-                <div className="loupe-reticle-cross" />
-                <div className="loupe-tag">
-                  {effectiveLoupeSensor.toUpperCase()} X-RAY
-                </div>
-                {analogLoupeTelemetry && (
-                  <div className="loupe-telemetry-badge">
-                    {analogLoupeTelemetry.physicalValue?.shortFormatted}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Enhanced Crosshair Marker with Real-Pixel Telemetry */}
-            {cursorPos && !loupeActive && (
-              <div
-                className="reticle-marker"
-                style={{
-                  left: `${cursorPos.pctX}%`,
-                  top: `${cursorPos.pctY}%`,
-                }}
-              >
-                <div className="crosshair-v" />
-                <div className="crosshair-h" />
-                <div className="reticle-box" />
-                <div className="reticle-telemetry-enhanced">
-                  <div className="reticle-row-primary">
-                    <span
-                      className="pixel-color-dot"
-                      style={{ backgroundColor: analogTelemetry.rgbString }}
-                      title={`Sampled RGB: ${analogTelemetry.rgbString}`}
-                    />
-                    <span className="reticle-sensor-val">
-                      {analogTelemetry.physicalValue.formatted}
-                    </span>
-                  </div>
-                  <div className="reticle-row-secondary">
-                    <span>L: {analogTelemetry.luminance}</span>
-                    <span className={`reticle-diff-tag ${differentialBadge.statusClass}`}>
-                      {differentialBadge.deltaPhysical}
-                    </span>
-                    <span className="sampling-type-indicator">
-                      {analogTelemetry.isRealPixel ? "● REAL" : "○ SIM"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="reticle-line-v" />
+            <div className="reticle-line-h" />
+            <div className="reticle-center-pip" />
+            <div className="reticle-glass-pill">
+              <span
+                className="reticle-swatch"
+                style={{ backgroundColor: targetTelemetry.rgbString }}
+              />
+              <span className="reticle-val">
+                {targetTelemetry.physicalValue.formatted}
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* ====================================================================
-          Interactive Local Patch Histogram & Live Spectral Inspector HUD Bar
+          RIGHT WORLD: EARTH ANALOG (50vw × 100vh)
           ==================================================================== */}
-      <div className={`telemetry-hud-wrapper ${isHudCollapsed ? "collapsed" : ""}`}>
-        {/* HUD Top Control Ribbon */}
-        <div className="telemetry-hud-header">
-          <div className="telemetry-hud-title-group">
-            <div className="telemetry-hud-icon-wrap">
-              <Activity size={16} />
-            </div>
-            <div className="telemetry-hud-heading">
-              <span>REAL-PIXEL CANAVAS TELEMETRY & SPECTRAL INSPECTOR</span>
-              <strong>
-                9×9 Neighborhood Transect · {activeSensor.toUpperCase()}
-              </strong>
-            </div>
-          </div>
+      <div
+        className="split-scope-pane right-pane"
+        ref={rightContainerRef}
+        onMouseMove={(e) => handleMouseMove(e, "right")}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Optical Corner Fiducial Brackets */}
+        <div className="viewport-fiducial tl">┌</div>
+        <div className="viewport-fiducial tr">┐</div>
+        <div className="viewport-fiducial bl">└</div>
+        <div className="viewport-fiducial br">┘</div>
 
-          {/* Instantaneous Target-vs-Analog Delta Differential Badge */}
-          <div className="telemetry-header-delta">
-            <div className="delta-fidelity-score">
-              <span
-                className="delta-num"
+        {/* 420ms Laser Calibration Sweep */}
+        {isScanning && <div className="laser-calibration-scanline" />}
+
+        <TransformWrapper
+          ref={rightTransformRef}
+          initialScale={1}
+          minScale={0.8}
+          maxScale={8}
+          onTransformed={(r, state) => syncTransform("right", state)}
+        >
+          <TransformComponent
+            wrapperStyle={{
+              width: "100%",
+              height: "100%",
+              position: "relative",
+              overflow: "hidden",
+            }}
+            contentStyle={{ width: "100%", height: "100%" }}
+          >
+            <SensorLayerImage
+              src={analogLayer?.path}
+              layerType={activeSensor}
+              alt={`${analog?.name} - ${activeSensor}`}
+              body="earth"
+              resolution={analogLayer?.resolution}
+              className={isScanning ? "focus-pull-active" : ""}
+            />
+          </TransformComponent>
+        </TransformWrapper>
+
+        {/* Circular X-Ray Magnifying Loupe Overlay */}
+        {loupeActive && cursorPos && (
+          <div
+            className="xray-loupe-circle"
+            style={{
+              left: `${cursorPos.pxX}px`,
+              top: `${cursorPos.pxY}px`,
+              width: `${loupeRadius * 2}px`,
+              height: `${loupeRadius * 2}px`,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <div
+              className="loupe-content-clipper"
+              style={{ clipPath: `circle(${loupeRadius}px at 50% 50%)` }}
+            >
+              <div
+                className="loupe-inner-image"
                 style={{
-                  color:
-                    differentialBadge.matchPercent >= 75
-                      ? "#34d399"
-                      : differentialBadge.matchPercent >= 45
-                      ? "#fbbf24"
-                      : "#fb7185",
+                  width: `${cursorPos.width}px`,
+                  height: `${cursorPos.height}px`,
+                  transform: `translate(-${cursorPos.pxX - loupeRadius}px, -${cursorPos.pxY - loupeRadius}px)`,
                 }}
               >
-                {differentialBadge.matchPercent}%
-              </span>
-              <span className="delta-label">FIDELITY MATCH</span>
+                <SensorLayerImage
+                  src={analogLoupeLayer?.path}
+                  layerType={effectiveLoupeSensor}
+                  alt={`${analog?.name} - Loupe`}
+                  body="earth"
+                  resolution={analogLoupeLayer?.resolution}
+                />
+              </div>
             </div>
-            <span className={`delta-status-pill ${differentialBadge.statusClass}`}>
-              {differentialBadge.status}
-            </span>
-            <span
-              style={{
-                fontSize: "11px",
-                fontFamily: "ui-monospace, monospace",
-                color: "#e2edf5",
-                fontWeight: 700,
-              }}
-            >
-              {differentialBadge.deltaPhysical}
-            </span>
-          </div>
-
-          {/* Utility Controls: Loupe Radius, Tactical Grid, & Collapse */}
-          <div className="telemetry-header-actions">
-            {/* Loupe Radius Selector */}
-            <div className="loupe-radius-selector" title="Switch X-Ray Loupe Radius">
-              <span className="loupe-radius-label">LOUPE:</span>
-              {LOUPE_RADII.map((radius) => (
-                <button
-                  key={radius}
-                  className={`loupe-radius-btn ${loupeRadius === radius ? "active" : ""}`}
-                  onClick={() => setLoupeRadius(radius)}
-                >
-                  {radius}px
-                </button>
-              ))}
-            </div>
-
-            {/* Tactical Grid Toggle */}
-            <button
-              className={`hud-control-btn ${showTacticalGrid ? "active" : ""}`}
-              onClick={() => setShowTacticalGrid(!showTacticalGrid)}
-              title="Toggle high-contrast coordinate grid overlay"
-            >
-              <Grid size={13} />
-              <span>GRID [{showTacticalGrid ? "ON" : "OFF"}]</span>
-            </button>
-
-            {/* Collapse / Expand Toggle */}
-            <button
-              className="hud-collapse-btn"
-              onClick={() => setIsHudCollapsed(!isHudCollapsed)}
-              title={isHudCollapsed ? "Expand Telemetry Inspector" : "Collapse Telemetry Inspector"}
-            >
-              {isHudCollapsed ? (
-                <>
-                  <span>EXPAND</span>
-                  <ChevronDown size={14} />
-                </>
-              ) : (
-                <>
-                  <span>COLLAPSE</span>
-                  <ChevronUp size={14} />
-                </>
+            <div className="loupe-ring" />
+            <div className="loupe-reticle-cross" />
+            <svg className="loupe-gyro-bezel" viewBox="0 0 100 100">
+              <circle
+                cx="50"
+                cy="50"
+                r="48"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.45)"
+                strokeWidth="0.8"
+                strokeDasharray="1.5 3"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="44"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.2)"
+                strokeWidth="0.5"
+              />
+              <line x1="50" y1="2" x2="50" y2="7" stroke="#38bdf8" strokeWidth="1.2" />
+              <line x1="50" y1="93" x2="50" y2="98" stroke="#38bdf8" strokeWidth="1.2" />
+              <line x1="2" y1="50" x2="7" y2="50" stroke="#38bdf8" strokeWidth="1.2" />
+              <line x1="93" y1="50" x2="98" y2="50" stroke="#38bdf8" strokeWidth="1.2" />
+            </svg>
+            <div className="loupe-rim-pill">
+              <span>{effectiveLoupeSensor.toUpperCase()} X-RAY</span>
+              {analogLoupeTelemetry && (
+                <strong>{analogLoupeTelemetry.physicalValue?.shortFormatted}</strong>
               )}
-            </button>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Collapsible HUD Body */}
-        {!isHudCollapsed && (
-          <>
-            <div className="telemetry-hud-body">
-              {/* Card 1: Target Spectral Patch (9×9 Kernel) */}
-              <div className="spectral-panel-card target-card">
-                <div className="spectral-card-header">
-                  <span>PLANETARY TARGET PATCH</span>
-                  <strong>{target?.body} · {target?.name?.split(" ")[0]}</strong>
-                </div>
-
-                <div className="spectral-pixel-meta">
-                  <div className="pixel-color-chip">
-                    <div
-                      className="pixel-preview-box"
-                      style={{ backgroundColor: targetTelemetry.rgbString }}
-                    />
-                    <div className="pixel-rgb-text">
-                      <strong>{targetTelemetry.hexColor.toUpperCase()}</strong>
-                      <small>Luminance: {targetTelemetry.luminance}</small>
-                    </div>
-                  </div>
-
-                  <div className="pixel-primary-readout">
-                    <span>{targetTelemetry.physicalValue.label.toUpperCase()}</span>
-                    <strong>{targetTelemetry.physicalValue.shortFormatted}</strong>
-                  </div>
-                </div>
-
-                {/* 8-Bin Mini-Histogram Sparkline */}
-                <div className="histogram-section">
-                  <div className="histogram-header">
-                    <span>9×9 LOCAL HISTOGRAM (8-BIN)</span>
-                    <small>σ (Roughness): {targetTelemetry.stdDev}</small>
-                  </div>
-                  <SparklineHistogram
-                    histogram={targetTelemetry.histogram}
-                    color="#22d3ee"
-                    label="Target"
-                  />
-                  <div className="histogram-axis-labels">
-                    <span>0.0 L (DARK)</span>
-                    <span>0.50</span>
-                    <span>1.0 L (BRIGHT)</span>
-                  </div>
-                </div>
-
-                {/* Secondary X-Ray Loupe Telemetry when Loupe Active */}
-                {loupeActive && targetLoupeTelemetry && (
-                  <div className="loupe-active-readout">
-                    <span>X-RAY [{effectiveLoupeSensor.toUpperCase()}]:</span>
-                    <strong>{targetLoupeTelemetry.physicalValue.formatted}</strong>
-                  </div>
-                )}
-              </div>
-
-              {/* Card 2: Center Correlation & Transect Analyzer */}
-              <div className="correlation-analyzer-card">
-                <div className="correlation-gauge-box">
-                  <span>LOCAL 9×9 KERNEL CORRELATION</span>
-                  <div
-                    className={`correlation-score-val ${differentialBadge.statusClass}`}
-                  >
-                    {patchCorrelation.correlationPercent}%
-                  </div>
-                  <div className="correlation-progress-track">
-                    <div
-                      className={`correlation-progress-fill ${differentialBadge.statusClass}`}
-                      style={{ width: `${patchCorrelation.correlationPercent}%` }}
-                    />
-                  </div>
-                </div>
-
-                <div className="metrics-keyvalue-stack">
-                  <div className="metric-kv-row">
-                    <span>Pearson Correlation (r):</span>
-                    <strong>{patchCorrelation.pearsonR >= 0 ? "+" : ""}{patchCorrelation.pearsonR}</strong>
-                  </div>
-                  <div className="metric-kv-row">
-                    <span>Luminance Differential (ΔL):</span>
-                    <strong>{differentialBadge.deltaLuminance}</strong>
-                  </div>
-                  <div className="metric-kv-row">
-                    <span>Micro-Roughness |Δσ|:</span>
-                    <strong>
-                      {Math.abs(targetTelemetry.stdDev - analogTelemetry.stdDev).toFixed(4)}
-                    </strong>
-                  </div>
-                </div>
-
-                <div className="terrain-class-tag" title="Local geomorphologic classification">
-                  CLASSIFICATION: {classifyMicroRoughness(targetTelemetry.stdDev)}
-                </div>
-              </div>
-
-              {/* Card 3: Earth Analog Spectral Patch (9×9 Kernel) */}
-              <div className="spectral-panel-card analog-card">
-                <div className="spectral-card-header">
-                  <span>EARTH ANALOG PATCH</span>
-                  <strong>{analog?.name}</strong>
-                </div>
-
-                <div className="spectral-pixel-meta">
-                  <div className="pixel-color-chip">
-                    <div
-                      className="pixel-preview-box"
-                      style={{ backgroundColor: analogTelemetry.rgbString }}
-                    />
-                    <div className="pixel-rgb-text">
-                      <strong>{analogTelemetry.hexColor.toUpperCase()}</strong>
-                      <small>Luminance: {analogTelemetry.luminance}</small>
-                    </div>
-                  </div>
-
-                  <div className="pixel-primary-readout">
-                    <span>{analogTelemetry.physicalValue.label.toUpperCase()}</span>
-                    <strong>{analogTelemetry.physicalValue.shortFormatted}</strong>
-                  </div>
-                </div>
-
-                {/* 8-Bin Mini-Histogram Sparkline */}
-                <div className="histogram-section">
-                  <div className="histogram-header">
-                    <span>9×9 LOCAL HISTOGRAM (8-BIN)</span>
-                    <small>σ (Roughness): {analogTelemetry.stdDev}</small>
-                  </div>
-                  <SparklineHistogram
-                    histogram={analogTelemetry.histogram}
-                    color="#10b981"
-                    label="Analog"
-                  />
-                  <div className="histogram-axis-labels">
-                    <span>0.0 L (DARK)</span>
-                    <span>0.50</span>
-                    <span>1.0 L (BRIGHT)</span>
-                  </div>
-                </div>
-
-                {/* Secondary X-Ray Loupe Telemetry when Loupe Active */}
-                {loupeActive && analogLoupeTelemetry && (
-                  <div className="loupe-active-readout">
-                    <span>X-RAY [{effectiveLoupeSensor.toUpperCase()}]:</span>
-                    <strong>{analogLoupeTelemetry.physicalValue.formatted}</strong>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Bottom Status Banner */}
-            <div className="transect-status-banner">
-              <span className="transect-coords">
-                KERNEL SAMPLER: 9×9 PIXELS (81 SAMPLES) · CURSOR: {activeCoord.pctX.toFixed(1)}% X, {activeCoord.pctY.toFixed(1)}% Y
+        {/* Minimalist Precision Reticle */}
+        {cursorPos && !loupeActive && (
+          <div
+            className="spatial-reticle"
+            style={{
+              left: `${cursorPos.pctX}%`,
+              top: `${cursorPos.pctY}%`,
+            }}
+          >
+            <div className="reticle-line-v" />
+            <div className="reticle-line-h" />
+            <div className="reticle-center-pip" />
+            <div className="reticle-glass-pill">
+              <span
+                className="reticle-swatch"
+                style={{ backgroundColor: analogTelemetry.rgbString }}
+              />
+              <span className="reticle-val">
+                {analogTelemetry.physicalValue.formatted}
               </span>
-              <span>
-                SAMPLING ENGINE:{" "}
-                <strong style={{ color: isRealPixelActive ? "#34d399" : "#fbbf24" }}>
-                  {isRealPixelActive ? "REAL-PIXEL OFFSCREEN CANVAS [ONLINE]" : "DETERMINISTIC FALLBACK MATRIX [ACTIVE]"}
-                </strong>
+              <span className={`reticle-delta-pill ${differentialBadge.statusClass}`}>
+                {differentialBadge.deltaPhysical}
               </span>
             </div>
-          </>
+          </div>
         )}
       </div>
+
+      {/* ====================================================================
+          FLOATING 9×9 TRANSECT HISTOGRAM POPOVER (APPLE VISIONOS FROSTED GLASS)
+          ==================================================================== */}
+      {showTransect && (
+        <div className="spatial-transect-popover">
+          <div className="transect-popover-header">
+            <div className="transect-popover-title">
+              <Activity size={15} color="#38bdf8" />
+              <span>9×9 KERNEL TRANSECT & LOCAL HISTOGRAMS</span>
+              <span className="transect-sensor-tag">{activeSensor.toUpperCase()}</span>
+            </div>
+            <button
+              className="spatial-close-btn"
+              onClick={onCloseTransect}
+              title="Close Transect Popover"
+            >
+              <X size={14} />
+            </button>
+          </div>
+
+          <div className="transect-popover-grid">
+            {/* Target Histogram */}
+            <div className="transect-patch-box">
+              <div className="transect-box-meta">
+                <span>
+                  {target?.body} · {target?.name?.split(" ")[0]}
+                </span>
+                <strong>{targetTelemetry.physicalValue.shortFormatted}</strong>
+              </div>
+              <SparklineHistogram
+                histogram={targetTelemetry.histogram}
+                color="#38bdf8"
+                label="Target"
+              />
+              <div className="transect-box-foot">
+                <span>σ (Roughness): {targetTelemetry.stdDev}</span>
+              </div>
+            </div>
+
+            {/* Center Gauge */}
+            <div className="transect-center-gauge">
+              <div className="transect-corr-label">PEARSON CORRELATION (r)</div>
+              <div className="transect-corr-val">
+                {patchCorrelation.pearsonR >= 0 ? "+" : ""}
+                {patchCorrelation.pearsonR}
+              </div>
+              <div className="transect-corr-match">
+                {patchCorrelation.correlationPercent}% Parametric Match
+              </div>
+              <div className="transect-class-pill">
+                {classifyMicroRoughness(targetTelemetry.stdDev)}
+              </div>
+            </div>
+
+            {/* Analog Histogram */}
+            <div className="transect-patch-box">
+              <div className="transect-box-meta">
+                <span>{analog?.name}</span>
+                <strong>{analogTelemetry.physicalValue.shortFormatted}</strong>
+              </div>
+              <SparklineHistogram
+                histogram={analogTelemetry.histogram}
+                color="#34d399"
+                label="Analog"
+              />
+              <div className="transect-box-foot">
+                <span>σ (Roughness): {analogTelemetry.stdDev}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+});
+
+export default SplitScope;
