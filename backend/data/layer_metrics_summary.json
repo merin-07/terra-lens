@@ -1,305 +1,850 @@
 {
-  "shackleton": {
-    "tablelands": {
+  "metadata": {
+    "engine": "TERRA-LENS Multi-Sensor Mathematical Pipeline v2.0",
+    "resolution": "800x800",
+    "layers": [
+      "optical",
+      "sar",
+      "thermal",
+      "slope"
+    ],
+    "total_rasters": 28
+  },
+  "site_sensor_statistics": {
+    "shackleton": {
       "optical": {
-        "target_mean": 0.5095,
-        "analog_mean": 0.6151,
-        "target_std": 0.2009,
-        "analog_std": 0.0565,
-        "structural_correlation": -0.0311
-      },
-      "sar": {
-        "target_mean": 0.4861,
-        "analog_mean": 0.475,
-        "target_std": 0.2703,
-        "analog_std": 0.2584,
-        "structural_correlation": 0.069
-      },
-      "thermal": {
-        "target_mean": 0.3918,
-        "analog_mean": 0.394,
-        "target_std": 0.2534,
-        "analog_std": 0.2521,
-        "structural_correlation": 0.0442
+        "raw_mean": 0.3364,
+        "raw_max": 1.0,
+        "raw_std_dev": 0.2716,
+        "mean": 0.15,
+        "max": 0.34,
+        "std_dev": 0.08,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.2834,
+          0.0379,
+          0.0447,
+          0.0527,
+          0.0615,
+          0.0688,
+          0.0731,
+          0.0737,
+          0.071,
+          0.063,
+          0.0528,
+          0.041,
+          0.0302,
+          0.0212,
+          0.0141,
+          0.0109
+        ]
       },
       "slope": {
-        "target_mean": 0.4604,
-        "analog_mean": 0.4616,
-        "target_std": 0.0813,
-        "analog_std": 0.081,
-        "structural_correlation": -0.0499
+        "raw_mean": 0.5573,
+        "raw_max": 0.9725,
+        "raw_std_dev": 0.2405,
+        "mean": 22.95,
+        "max": 37.07,
+        "std_dev": 8.18,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0721,
+          0.1651,
+          0.0288,
+          0.0394,
+          0.0655,
+          0.2023,
+          0.1732,
+          0.0183,
+          0.0191,
+          0.0173,
+          0.0159,
+          0.0153,
+          0.1675
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.4932,
+        "raw_max": 1.0,
+        "raw_std_dev": 0.2263,
+        "mean": 1.89,
+        "max": 3.0,
+        "std_dev": 0.5,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.044,
+          0.0391,
+          0.0324,
+          0.0415,
+          0.1461,
+          0.2091,
+          0.0929,
+          0.0715,
+          0.0672,
+          0.062,
+          0.0438,
+          0.0358,
+          0.0285,
+          0.0221,
+          0.064
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.1106,
+        "raw_max": 0.9685,
+        "raw_std_dev": 0.1252,
+        "mean": 65.23,
+        "max": 245.39,
+        "std_dev": 26.3,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.6822,
+          0.0956,
+          0.0754,
+          0.0437,
+          0.0324,
+          0.0239,
+          0.015,
+          0.0089,
+          0.0061,
+          0.005,
+          0.0031,
+          0.0023,
+          0.0012,
+          0.001,
+          0.0008,
+          0.0036
+        ]
+      }
+    },
+    "jezero": {
+      "optical": {
+        "raw_mean": 0.5326,
+        "raw_max": 0.6534,
+        "raw_std_dev": 0.035,
+        "mean": 0.25,
+        "max": 0.29,
+        "std_dev": 0.01,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0666,
+          0.7462,
+          0.1668,
+          0.0204,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "slope": {
+        "raw_mean": 0.2617,
+        "raw_max": 0.6007,
+        "raw_std_dev": 0.0122,
+        "mean": 12.9,
+        "max": 24.43,
+        "std_dev": 0.41,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.108,
+          0.8873,
+          0.0032,
+          0.0009,
+          0.0006,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.3893,
+        "raw_max": 0.7632,
+        "raw_std_dev": 0.0304,
+        "mean": 1.66,
+        "max": 2.48,
+        "std_dev": 0.07,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3538,
+          0.5954,
+          0.0508,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.205,
+        "raw_max": 0.3128,
+        "raw_std_dev": 0.0088,
+        "mean": 203.45,
+        "max": 213.15,
+        "std_dev": 0.79,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0576,
+          0.9418,
+          0.0006,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "tablelands": {
+      "optical": {
+        "raw_mean": 0.3583,
+        "raw_max": 0.9628,
+        "raw_std_dev": 0.1554,
+        "mean": 0.2,
+        "max": 0.43,
+        "std_dev": 0.06,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.0066,
+          0.0164,
+          0.0623,
+          0.1728,
+          0.2243,
+          0.1558,
+          0.0925,
+          0.078,
+          0.0661,
+          0.0337,
+          0.0443,
+          0.0416,
+          0.0046,
+          0.0008,
+          0.0002,
+          0.0
+        ]
+      },
+      "slope": {
+        "raw_mean": 0.379,
+        "raw_max": 0.9725,
+        "raw_std_dev": 0.0983,
+        "mean": 16.88,
+        "max": 37.07,
+        "std_dev": 3.34,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.006,
+          0.2857,
+          0.2858,
+          0.1776,
+          0.1253,
+          0.0696,
+          0.0421,
+          0.0012,
+          0.0012,
+          0.001,
+          0.0007,
+          0.0007,
+          0.0033
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.3956,
+        "raw_max": 0.9408,
+        "raw_std_dev": 0.0615,
+        "mean": 1.67,
+        "max": 2.87,
+        "std_dev": 0.14,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.0023,
+          0.0022,
+          0.0071,
+          0.0386,
+          0.3085,
+          0.4346,
+          0.1652,
+          0.0281,
+          0.009,
+          0.0031,
+          0.0009,
+          0.0003,
+          0.0001,
+          0.0,
+          0.0
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.2598,
+        "raw_max": 0.9423,
+        "raw_std_dev": 0.0475,
+        "mean": 285.79,
+        "max": 340.38,
+        "std_dev": 3.8,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0903,
+          0.2574,
+          0.5618,
+          0.0766,
+          0.0093,
+          0.0027,
+          0.0012,
+          0.0006,
+          0.0002,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
       }
     },
     "harrat-khaybar": {
       "optical": {
-        "target_mean": 0.5095,
-        "analog_mean": 0.2547,
-        "target_std": 0.2009,
-        "analog_std": 0.0517,
-        "structural_correlation": -0.0677
-      },
-      "sar": {
-        "target_mean": 0.4861,
-        "analog_mean": 0.4731,
-        "target_std": 0.2703,
-        "analog_std": 0.263,
-        "structural_correlation": 0.0503
-      },
-      "thermal": {
-        "target_mean": 0.3918,
-        "analog_mean": 0.3895,
-        "target_std": 0.2534,
-        "analog_std": 0.2523,
-        "structural_correlation": -0.0027
+        "raw_mean": 0.4301,
+        "raw_max": 0.8775,
+        "raw_std_dev": 0.106,
+        "mean": 0.22,
+        "max": 0.39,
+        "std_dev": 0.04,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0003,
+          0.0129,
+          0.0698,
+          0.2858,
+          0.2284,
+          0.1705,
+          0.1018,
+          0.0642,
+          0.0498,
+          0.0138,
+          0.0026,
+          0.0001,
+          0.0,
+          0.0
+        ]
       },
       "slope": {
-        "target_mean": 0.4604,
-        "analog_mean": 0.4609,
-        "target_std": 0.0813,
-        "analog_std": 0.0818,
-        "structural_correlation": -0.0931
+        "raw_mean": 0.3564,
+        "raw_max": 0.9725,
+        "raw_std_dev": 0.0797,
+        "mean": 16.12,
+        "max": 37.07,
+        "std_dev": 2.71,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0058,
+          0.352,
+          0.3168,
+          0.1647,
+          0.0992,
+          0.0409,
+          0.0193,
+          0.0002,
+          0.0002,
+          0.0002,
+          0.0001,
+          0.0001,
+          0.0006
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.3925,
+        "raw_max": 0.9918,
+        "raw_std_dev": 0.0491,
+        "mean": 1.66,
+        "max": 2.98,
+        "std_dev": 0.11,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.0006,
+          0.0006,
+          0.003,
+          0.029,
+          0.3272,
+          0.4713,
+          0.1505,
+          0.0148,
+          0.0024,
+          0.0004,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.2393,
+        "raw_max": 0.6302,
+        "raw_std_dev": 0.0311,
+        "mean": 284.15,
+        "max": 315.41,
+        "std_dev": 2.49,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.066,
+          0.5689,
+          0.3504,
+          0.0138,
+          0.0008,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
       }
     },
     "sredinny": {
       "optical": {
-        "target_mean": 0.5095,
-        "analog_mean": 0.2853,
-        "target_std": 0.2009,
-        "analog_std": 0.0538,
-        "structural_correlation": 0.0188
-      },
-      "sar": {
-        "target_mean": 0.4861,
-        "analog_mean": 0.4728,
-        "target_std": 0.2703,
-        "analog_std": 0.2686,
-        "structural_correlation": -0.0176
-      },
-      "thermal": {
-        "target_mean": 0.3918,
-        "analog_mean": 0.3877,
-        "target_std": 0.2534,
-        "analog_std": 0.2498,
-        "structural_correlation": -0.2018
+        "raw_mean": 0.4302,
+        "raw_max": 1.0,
+        "raw_std_dev": 0.2387,
+        "mean": 0.22,
+        "max": 0.44,
+        "std_dev": 0.09,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.0179,
+          0.0492,
+          0.0748,
+          0.1062,
+          0.1362,
+          0.1131,
+          0.0909,
+          0.0787,
+          0.0594,
+          0.0481,
+          0.0456,
+          0.0448,
+          0.0407,
+          0.0346,
+          0.0318,
+          0.0279
+        ]
       },
       "slope": {
-        "target_mean": 0.4604,
-        "analog_mean": 0.4627,
-        "target_std": 0.0813,
-        "analog_std": 0.0799,
-        "structural_correlation": -0.03
+        "raw_mean": 0.4446,
+        "raw_max": 0.9725,
+        "raw_std_dev": 0.146,
+        "mean": 19.12,
+        "max": 37.07,
+        "std_dev": 4.97,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0024,
+          0.1621,
+          0.214,
+          0.1688,
+          0.153,
+          0.1413,
+          0.1048,
+          0.0051,
+          0.0052,
+          0.0046,
+          0.0036,
+          0.0036,
+          0.0314
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.4033,
+        "raw_max": 1.0,
+        "raw_std_dev": 0.0951,
+        "mean": 1.69,
+        "max": 3.0,
+        "std_dev": 0.21,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.0144,
+          0.0084,
+          0.0199,
+          0.0579,
+          0.2473,
+          0.3552,
+          0.1915,
+          0.0561,
+          0.0254,
+          0.0131,
+          0.0058,
+          0.0029,
+          0.0013,
+          0.0006,
+          0.0003
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.254,
+        "raw_max": 0.9685,
+        "raw_std_dev": 0.0713,
+        "mean": 285.32,
+        "max": 342.48,
+        "std_dev": 5.71,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.0,
+          0.0137,
+          0.1708,
+          0.265,
+          0.3999,
+          0.1113,
+          0.0233,
+          0.008,
+          0.0039,
+          0.0022,
+          0.0011,
+          0.0005,
+          0.0002,
+          0.0001,
+          0.0,
+          0.0
+        ]
       }
     },
     "tuktoyaktuk": {
       "optical": {
-        "target_mean": 0.5095,
-        "analog_mean": 0.5423,
-        "target_std": 0.2009,
-        "analog_std": 0.0593,
-        "structural_correlation": -0.0285
-      },
-      "sar": {
-        "target_mean": 0.4861,
-        "analog_mean": 0.4778,
-        "target_std": 0.2703,
-        "analog_std": 0.2544,
-        "structural_correlation": 0.2631
-      },
-      "thermal": {
-        "target_mean": 0.3918,
-        "analog_mean": 0.3947,
-        "target_std": 0.2534,
-        "analog_std": 0.2604,
-        "structural_correlation": 0.1347
+        "raw_mean": 0.4239,
+        "raw_max": 0.9964,
+        "raw_std_dev": 0.0942,
+        "mean": 0.22,
+        "max": 0.44,
+        "std_dev": 0.04,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.0,
+          0.0005,
+          0.02,
+          0.0325,
+          0.0408,
+          0.2313,
+          0.1903,
+          0.2193,
+          0.2319,
+          0.0284,
+          0.0037,
+          0.0006,
+          0.0002,
+          0.0002,
+          0.0001,
+          0.0001
+        ]
       },
       "slope": {
-        "target_mean": 0.4604,
-        "analog_mean": 0.458,
-        "target_std": 0.0813,
-        "analog_std": 0.0836,
-        "structural_correlation": -0.017
+        "raw_mean": 0.3162,
+        "raw_max": 0.9725,
+        "raw_std_dev": 0.0919,
+        "mean": 14.75,
+        "max": 37.07,
+        "std_dev": 3.12,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.1905,
+          0.4659,
+          0.154,
+          0.0736,
+          0.053,
+          0.0351,
+          0.0244,
+          0.0005,
+          0.0004,
+          0.0004,
+          0.0002,
+          0.0003,
+          0.0017
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.3892,
+        "raw_max": 1.0,
+        "raw_std_dev": 0.0489,
+        "mean": 1.66,
+        "max": 3.0,
+        "std_dev": 0.11,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.0014,
+          0.0013,
+          0.0046,
+          0.0189,
+          0.3555,
+          0.5108,
+          0.0879,
+          0.0135,
+          0.0041,
+          0.0014,
+          0.0004,
+          0.0002,
+          0.0001,
+          0.0,
+          0.0
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.2369,
+        "raw_max": 0.76,
+        "raw_std_dev": 0.0301,
+        "mean": 283.95,
+        "max": 325.8,
+        "std_dev": 2.41,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0071,
+          0.7208,
+          0.2527,
+          0.016,
+          0.0027,
+          0.0004,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
       }
     },
     "lut-desert": {
       "optical": {
-        "target_mean": 0.5095,
-        "analog_mean": 0.7065,
-        "target_std": 0.2009,
-        "analog_std": 0.0435,
-        "structural_correlation": -0.0101
-      },
-      "sar": {
-        "target_mean": 0.4861,
-        "analog_mean": 0.4782,
-        "target_std": 0.2703,
-        "analog_std": 0.2658,
-        "structural_correlation": -0.2204
-      },
-      "thermal": {
-        "target_mean": 0.3918,
-        "analog_mean": 0.3914,
-        "target_std": 0.2534,
-        "analog_std": 0.2623,
-        "structural_correlation": -0.0382
+        "raw_mean": 0.5592,
+        "raw_max": 0.9933,
+        "raw_std_dev": 0.1564,
+        "mean": 0.27,
+        "max": 0.44,
+        "std_dev": 0.06,
+        "unit": "Albedo / Surface Reflectance",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0005,
+          0.043,
+          0.154,
+          0.1108,
+          0.0683,
+          0.0683,
+          0.1033,
+          0.1812,
+          0.1896,
+          0.0709,
+          0.0087,
+          0.0012,
+          0.0004
+        ]
       },
       "slope": {
-        "target_mean": 0.4604,
-        "analog_mean": 0.4619,
-        "target_std": 0.0813,
-        "analog_std": 0.0808,
-        "structural_correlation": 0.4037
+        "raw_mean": 0.4429,
+        "raw_max": 0.9725,
+        "raw_std_dev": 0.1336,
+        "mean": 19.06,
+        "max": 37.07,
+        "std_dev": 4.54,
+        "unit": "Topographic Slope (Degrees)",
+        "histogram_16bin": [
+          0.0,
+          0.0,
+          0.0,
+          0.0039,
+          0.1666,
+          0.1912,
+          0.1585,
+          0.1593,
+          0.1592,
+          0.1201,
+          0.0062,
+          0.0059,
+          0.0052,
+          0.0039,
+          0.0039,
+          0.0162
+        ]
+      },
+      "sar": {
+        "raw_mean": 0.4003,
+        "raw_max": 1.0,
+        "raw_std_dev": 0.1102,
+        "mean": 1.68,
+        "max": 3.0,
+        "std_dev": 0.24,
+        "unit": "Circular Polarization Ratio (CPR / dB)",
+        "histogram_16bin": [
+          0.0,
+          0.0267,
+          0.0161,
+          0.0307,
+          0.0709,
+          0.2261,
+          0.3027,
+          0.1874,
+          0.0715,
+          0.0376,
+          0.0195,
+          0.0074,
+          0.0026,
+          0.0007,
+          0.0001,
+          0.0
+        ]
+      },
+      "thermal": {
+        "raw_mean": 0.2144,
+        "raw_max": 0.804,
+        "raw_std_dev": 0.0432,
+        "mean": 282.15,
+        "max": 329.32,
+        "std_dev": 3.46,
+        "unit": "Radiometric Temperature (Kelvin)",
+        "histogram_16bin": [
+          0.0,
+          0.0001,
+          0.3566,
+          0.4237,
+          0.2016,
+          0.0149,
+          0.0024,
+          0.0005,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
       }
     }
   },
-  "jezero": {
-    "tablelands": {
-      "optical": {
-        "target_mean": 0.5011,
-        "analog_mean": 0.6164,
-        "target_std": 0.0663,
-        "analog_std": 0.0566,
-        "structural_correlation": -0.2062
+  "pairwise_correlations": {
+    "shackleton": {
+      "tablelands": {
+        "optical": -0.0864,
+        "sar": 0.0743,
+        "thermal": 0.0341,
+        "slope": 0.028
       },
-      "sar": {
-        "target_mean": 0.4744,
-        "analog_mean": 0.475,
-        "target_std": 0.2588,
-        "analog_std": 0.2584,
-        "structural_correlation": 0.0453
+      "harrat-khaybar": {
+        "optical": 0.024,
+        "sar": 0.0901,
+        "thermal": 0.0058,
+        "slope": 0.0012
       },
-      "thermal": {
-        "target_mean": 0.391,
-        "analog_mean": 0.394,
-        "target_std": 0.2499,
-        "analog_std": 0.2521,
-        "structural_correlation": 0.0261
+      "sredinny": {
+        "optical": -0.3167,
+        "sar": 0.0425,
+        "thermal": 0.0821,
+        "slope": -0.0315
       },
-      "slope": {
-        "target_mean": 0.4601,
-        "analog_mean": 0.4616,
-        "target_std": 0.0817,
-        "analog_std": 0.081,
-        "structural_correlation": -0.0511
+      "tuktoyaktuk": {
+        "optical": -0.0333,
+        "sar": 0.0877,
+        "thermal": 0.0104,
+        "slope": 0.0244
+      },
+      "lut-desert": {
+        "optical": 0.0047,
+        "sar": 0.0422,
+        "thermal": 0.0015,
+        "slope": 0.0167
       }
     },
-    "harrat-khaybar": {
-      "optical": {
-        "target_mean": 0.5011,
-        "analog_mean": 0.2563,
-        "target_std": 0.0663,
-        "analog_std": 0.0571,
-        "structural_correlation": 0.0518
+    "jezero": {
+      "tablelands": {
+        "optical": -0.0131,
+        "sar": 0.4681,
+        "thermal": 0.0089,
+        "slope": 0.0019
       },
-      "sar": {
-        "target_mean": 0.4744,
-        "analog_mean": 0.4731,
-        "target_std": 0.2588,
-        "analog_std": 0.263,
-        "structural_correlation": 0.1051
+      "harrat-khaybar": {
+        "optical": -0.1625,
+        "sar": 0.5817,
+        "thermal": -0.1051,
+        "slope": -0.003
       },
-      "thermal": {
-        "target_mean": 0.391,
-        "analog_mean": 0.3895,
-        "target_std": 0.2499,
-        "analog_std": 0.2523,
-        "structural_correlation": 0.4108
+      "sredinny": {
+        "optical": 0.1117,
+        "sar": 0.3101,
+        "thermal": 0.0785,
+        "slope": -0.0016
       },
-      "slope": {
-        "target_mean": 0.4601,
-        "analog_mean": 0.4609,
-        "target_std": 0.0817,
-        "analog_std": 0.0818,
-        "structural_correlation": 0.0947
-      }
-    },
-    "sredinny": {
-      "optical": {
-        "target_mean": 0.5011,
-        "analog_mean": 0.2896,
-        "target_std": 0.0663,
-        "analog_std": 0.0534,
-        "structural_correlation": -0.0001
+      "tuktoyaktuk": {
+        "optical": 0.0369,
+        "sar": 0.5856,
+        "thermal": 0.0156,
+        "slope": -0.0021
       },
-      "sar": {
-        "target_mean": 0.4744,
-        "analog_mean": 0.4728,
-        "target_std": 0.2588,
-        "analog_std": 0.2686,
-        "structural_correlation": 0.4838
-      },
-      "thermal": {
-        "target_mean": 0.391,
-        "analog_mean": 0.3877,
-        "target_std": 0.2499,
-        "analog_std": 0.2498,
-        "structural_correlation": 0.0145
-      },
-      "slope": {
-        "target_mean": 0.4601,
-        "analog_mean": 0.4627,
-        "target_std": 0.0817,
-        "analog_std": 0.0799,
-        "structural_correlation": -0.1031
-      }
-    },
-    "tuktoyaktuk": {
-      "optical": {
-        "target_mean": 0.5011,
-        "analog_mean": 0.5442,
-        "target_std": 0.0663,
-        "analog_std": 0.0593,
-        "structural_correlation": -0.0058
-      },
-      "sar": {
-        "target_mean": 0.4744,
-        "analog_mean": 0.4778,
-        "target_std": 0.2588,
-        "analog_std": 0.2544,
-        "structural_correlation": 0.0135
-      },
-      "thermal": {
-        "target_mean": 0.391,
-        "analog_mean": 0.3947,
-        "target_std": 0.2499,
-        "analog_std": 0.2604,
-        "structural_correlation": -0.1364
-      },
-      "slope": {
-        "target_mean": 0.4601,
-        "analog_mean": 0.458,
-        "target_std": 0.0817,
-        "analog_std": 0.0836,
-        "structural_correlation": 0.1954
-      }
-    },
-    "lut-desert": {
-      "optical": {
-        "target_mean": 0.5011,
-        "analog_mean": 0.7041,
-        "target_std": 0.0663,
-        "analog_std": 0.0431,
-        "structural_correlation": 0.0138
-      },
-      "sar": {
-        "target_mean": 0.4744,
-        "analog_mean": 0.4782,
-        "target_std": 0.2588,
-        "analog_std": 0.2658,
-        "structural_correlation": 0.0513
-      },
-      "thermal": {
-        "target_mean": 0.391,
-        "analog_mean": 0.3914,
-        "target_std": 0.2499,
-        "analog_std": 0.2623,
-        "structural_correlation": 0.303
-      },
-      "slope": {
-        "target_mean": 0.4601,
-        "analog_mean": 0.4619,
-        "target_std": 0.0817,
-        "analog_std": 0.0808,
-        "structural_correlation": 0.0582
+      "lut-desert": {
+        "optical": 0.018,
+        "sar": 0.2652,
+        "thermal": 0.0278,
+        "slope": 0.0055
       }
     }
   }
