@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { preloadCanvasImage } from "../utils/pixelTelemetry";
 
 const BASE_FALLBACK_IMAGE = "/data/moon/shackleton/optical/shackleton_preview_cropped.png";
 
@@ -6,6 +7,7 @@ const BASE_FALLBACK_IMAGE = "/data/moon/shackleton/optical/shackleton_preview_cr
  * SensorLayerImage renders multi-spectral planetary and terrestrial imagery.
  * If a derived image is not present on disk, it falls back to the preserved base texture
  * with scientific SVG/CSS colormaps (Optical, SAR speckled grayscale, Thermal Inferno LUT, Slope relief).
+ * Primes offscreen canvas telemetry cache when image loads.
  */
 export default function SensorLayerImage({
   src,
@@ -15,16 +17,30 @@ export default function SensorLayerImage({
   style = {},
   body = "earth",
   resolution = "10 m/px",
+  onLoad,
 }) {
   const [failedSrc, setFailedSrc] = useState(null);
 
   const isFailed = failedSrc === src;
   const currentSrc = isFailed ? BASE_FALLBACK_IMAGE : (src || BASE_FALLBACK_IMAGE);
 
+  // Preload and prime offscreen canvas cache whenever image source changes
+  useEffect(() => {
+    if (currentSrc) {
+      preloadCanvasImage(currentSrc);
+    }
+  }, [currentSrc]);
+
   const handleError = () => {
     if (src && failedSrc !== src) {
       setFailedSrc(src);
+      preloadCanvasImage(BASE_FALLBACK_IMAGE);
     }
+  };
+
+  const handleImageLoad = (e) => {
+    preloadCanvasImage(currentSrc);
+    if (onLoad) onLoad(e);
   };
 
   // Determine filter style and overlay colormaps based on active sensor
@@ -66,6 +82,8 @@ export default function SensorLayerImage({
       <img
         src={currentSrc}
         alt={alt}
+        crossOrigin="anonymous"
+        onLoad={handleImageLoad}
         onError={handleError}
         style={{
           width: "100%",
